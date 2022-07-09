@@ -1,0 +1,30 @@
+import os
+from soulstruct import DCX
+from soulstruct.emevd import EMEVD, ALL_MAPS, OOLACILE
+
+
+DSR_EMEVD_DIRECTORY = 'G:/Steam/steamapps/common/DARK SOULS REMASTERED/event'
+
+
+def compile_emevd():
+
+    print('\nCompiling EMEVD...\n')
+
+    for game_map in (OOLACILE,):
+        emevd_name = game_map.file_name
+
+        evs_path = os.path.join(os.path.dirname(__file__), emevd_name + '.evs')
+        emevd_path = os.path.join(DSR_EMEVD_DIRECTORY, emevd_name + '.emevd.dcx')
+
+        emevd = EMEVD(evs_path)
+        emevd.write_verbose(os.path.join('built_verbose', emevd_name + '.verbose.txt'))
+        emevd_dcx = DCX(emevd.pack())
+        emevd_dcx.write(emevd_path)
+
+        print(f'Compiled {emevd_name}.')
+
+    print('\nAll EMEVD compiled.')
+
+
+if __name__ == '__main__':
+    compile_emevd()

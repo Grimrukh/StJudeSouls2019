@@ -1,0 +1,13 @@
+Basic idea for the mod's story at the moment is this (we could keep this a surprise for the others as well):
+- You start in the Asylum with a few friends, but Primordial Serpents will appear in the church and abduct them all; only you escape.
+- You reach Firelink, which is a SM64-esque hub world for three levels you can warp to.
+- Each level gets you an ally: either one of the abducted ones (e.g. Solaire), or a new one (e.g. Patches).
+- After you rescue two allies, Frampt will awaken. He claims to be an "outcast of the Serpents".
+- He's impressed you've managed to make it to Lordran (rather than ringing the Bell), but tells you you'll need more help than you have to defeat the Serpents' legion.
+- If you accept his offer to lead the way to more allies, he will unlock the second tier of levels (say, the second set of three) for you to access. These levels are harder, but you can bring one of your friends with you.
+- If you refuse, he'll just wait for you to talk to him again and accept, like before. (You won't be able to scare him off or hurt him until this point.)
+- You can sell stuff to him as usual.
+- When you assemble your full team (say, six), he gets excited and will offer to take you to "the end of your quest".
+- The Twist: he's just as evil as the rest of them and, if he eats you, you will start the Big Battle imprisoned and your allies will appear and free you before it begins.
+- You can also kill him by feeding him a special item you've found during the game, and start the battle at no such disadvantage (by jumping into the hole yourself).
+- Either way, you end up in Kalameet's arena, which is where the battle will happen.

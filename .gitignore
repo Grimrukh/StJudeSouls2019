@@ -1,0 +1,5 @@
+.idea/
+venv*
+bank/
+__pycache__
+*.fsb

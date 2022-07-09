@@ -1,0 +1,2165 @@
+from soulstruct.emevd import *
+from .oolacile_constants import *
+
+
+def Constructor():
+    """ 0: Event 0 """
+    RunEvent(11210700)  # Arena stuff. Leaving, because it probably disables a bunch of SFX.
+    
+    # Delete summon fog (leave).
+    DisableObject(1211988)
+    DeleteFX(1211989, erase_root_only=False)
+    DisableObject(1211994)
+    DeleteFX(1211995, erase_root_only=False)
+    DisableObject(1211996)
+    DeleteFX(1211997, erase_root_only=False)
+    DisableObject(1211998)
+    DeleteFX(1211999, erase_root_only=False)
+    DisableObject(1211986)
+    DeleteFX(1211987, erase_root_only=False)
+    DisableHitbox(1213061)
+    
+    # Not sure. Leave.
+    SkipLinesIfFlagOff(2, 11210539)
+    EnableHitbox(1213061)
+    DisableHitbox(1213060)
+    
+    # Sanctuary Guardian remnants.
+    DisableMapSound(1213800)
+    DisableObject(1211790)
+    DeleteFX(1211791, erase_root_only=False)
+    DisableObject(1211792)
+    DeleteFX(1211793, erase_root_only=False)
+
+    # Artorias remnants.
+    DisableMapSound(1213801)
+    DisableObject(1211890)
+    DeleteFX(1211891, erase_root_only=False)
+    DisableObject(1211892)
+    DeleteFX(1211893, erase_root_only=False)
+    DisableHitbox(1213001)
+    
+    # Manus remnants.
+    DisableMapSound(1213802)
+    DisableObject(1211990)
+    DeleteFX(1211991, erase_root_only=False)
+
+    # Kalameet remnants.
+    DisableMapSound(1213803)
+    DisableObject(1211690)
+    DeleteFX(1211691, erase_root_only=False)
+    EnableHitbox(1213001)
+    RunEvent(11215050)  # Sets event points for Kalameet boss (leave).
+    RunEvent(11215051)  # Kalameet tail cut. (No item.)
+    RunEvent(11215052)  # Kalameet tail behavior logic.
+
+    # Moved the ladder out of Kalameet's arena.
+
+    # Old Sif remnants.
+    DeleteFX(1213110, erase_root_only=False)
+    DisableObject(1211230)
+    DeleteFX(1213100, erase_root_only=True)
+
+    # SifLimping()
+
+    DisableMapSound(1213810)
+    DisableMapSound(1213811)
+
+    FullBattleSequence()
+
+
+def Preconstructor():
+    """ 50: Event 50 """
+    DisableObject(1211130)
+    DeleteFX(1213150, erase_root_only=False)
+    EndOfAnimation(1211606, 0)
+    EndOfAnimation(1211607, 0)
+
+    # New events.
+
+    SetTeamType(CHR.Solaire, TeamType.white_phantom)
+    SetTeamType(CHR.Logan, TeamType.white_phantom)
+    SetTeamType(CHR.Siegmeyer, TeamType.white_phantom)
+    SetTeamType(CHR.Patches, TeamType.white_phantom)
+    SetTeamType(CHR.Quelana, TeamType.white_phantom)
+    SetTeamType(CHR.Ornstein, TeamType.white_phantom)
+    SetTeamType(CHR.Havel, TeamType.white_phantom)
+    SetTeamType(CHR.Sif, TeamType.white_phantom)
+
+    AllyStJude(0, CHR.Solaire)
+    AllyStJude(1, CHR.Siegmeyer)
+    AllyStJude(2, CHR.Patches)
+    AllyStJude(3, CHR.Ornstein)
+    AllyStJude(4, CHR.Logan)
+    AllyStJude(5, CHR.Havel)
+    AllyStJude(6, CHR.Quelana)
+    AllyStJude(7, CHR.Sif)
+
+    AllyMustRecover(0, CHR.Solaire)
+    AllyMustRecover(1, CHR.Siegmeyer)
+    AllyMustRecover(2, CHR.Patches)
+    AllyMustRecover(3, CHR.Quelana)
+    AllyMustRecover(4, CHR.Logan)
+    AllyMustRecover(5, CHR.Havel)
+    AllyMustRecover(6, CHR.Ornstein)
+    SifImmortality()
+    SifOffCliff()
+
+    MonitorEnemySoldier(0, 1210000)
+    MonitorEnemySoldier(1, 1210001)
+    MonitorEnemySoldier(2, 1210002)
+    MonitorEnemySoldier(3, 1210003)
+    MonitorEnemySoldier(4, 1210004)
+    MonitorEnemySoldier(5, 1210005)
+    MonitorEnemySoldier(6, 1210006)
+    MonitorEnemySoldier(7, 1210007)
+    MonitorEnemySoldier(8, 1210008)
+    MonitorEnemySoldier(9, 1210009)
+    MonitorEnemySoldier(10, 1210010)
+    MonitorEnemySoldier(11, 1210011)
+    MonitorEnemySoldier(12, 1210012)
+    MonitorEnemySoldier(13, 1210013)
+    MonitorEnemySoldier(14, 1210014)
+    MonitorEnemySoldier(15, 1210015)
+    MonitorEnemySoldier(16, 1210016)
+    MonitorEnemySoldier(17, 1210017)
+    MonitorEnemySoldier(18, 1210018)
+    MonitorEnemySoldier(19, 1210019)
+    MonitorEnemySoldier(20, 1210020)
+    MonitorEnemySoldier(21, 1210021)
+    MonitorEnemySoldier(22, 1210022)
+    MonitorEnemySoldier(23, 1210023)
+    MonitorEnemySoldier(24, 1210024)
+    MonitorEnemySoldier(25, 1210025)
+    MonitorEnemySoldier(26, 1210026)
+    MonitorEnemySoldier(27, 1210027)
+    MonitorEnemySoldier(28, 1210028)
+    MonitorEnemySoldier(29, 1210029)
+    MonitorEnemySoldier(30, 1210030)
+    MonitorEnemySoldier(31, 1210031)
+    MonitorEnemySoldier(32, 1210032)
+    MonitorEnemySoldier(33, 1210033)
+    MonitorEnemySoldier(34, 1210034)
+    MonitorEnemySoldier(35, 1210035)
+    MonitorEnemySoldier(36, 1210036)
+    MonitorEnemySoldier(37, 1210037)
+    MonitorEnemySoldier(38, 1210038)
+    MonitorEnemySoldier(39, 1210039)
+    MonitorEnemySoldier(40, 1210040)
+    MonitorEnemySoldier(41, 1210041)
+    MonitorEnemySoldier(42, 1210042)
+    MonitorEnemySoldier(43, 1210043)
+    MonitorEnemySoldier(44, 1210044)
+    MonitorEnemySoldier(45, 1210045)
+    MonitorEnemySoldier(46, 1210046)
+    MonitorEnemySoldier(47, 1210047)
+    MonitorEnemySoldier(48, 1210048)
+    MonitorEnemySoldier(49, 1210049)
+    MonitorEnemySoldier(50, 1210050)
+    MonitorEnemySoldier(51, 1210051)
+    MonitorEnemySoldier(52, 1210052)
+
+
+@RestartOnRest
+def MonitorEnemySoldier(soldier_id: int):
+    """ 11215400: Disables its health bar and enables flag on death. """
+    DisableHealthBar(soldier_id)
+    await IsDead(soldier_id)
+    return
+
+
+@RestartOnRest
+def FullBattleSequence():
+    """ 11210000: Black Eye Gough spawns. """
+    if FLAG.BattleStarted:
+        # Game was save-and-quitted. Return to Firelink.
+        DisableFlag(FLAG.BattleStarted)
+        WarpToMap(FIRELINK_SHRINE)
+        return
+
+    EnableFlag(FLAG.BattleStarted)
+
+    DisableCharacter(CHR.BlackEyeGough)
+
+    SetTeamType(CHR.FramptSwoop, TeamType.white_phantom)  # So allies don't try to attack him.
+    DisableAI(CHR.FramptSwoop)
+    EnableImmortality(CHR.FramptSwoop)
+    DisableGravity(CHR.FramptSwoop)
+    DisableCollision(CHR.FramptSwoop)
+    DisableCharacter(CHR.FramptSwoop)
+    SetNetworkUpdateAuthority(CHR.FramptSwoop, UpdateAuthority.forced)
+    SetNetworkUpdateRate(CHR.FramptSwoop, is_fixed=1, frequency=CharacterUpdateRate.always)
+
+    DisableCharacter(CHR.FramptBoss)
+
+    # PHASE 1: Enemy Soldiers
+
+    # PHASE 2: Black-Eye Gough
+
+    IfTrueFlagCountGreaterThanOrEqual(0, 30, 11215400, 11215442)  # Thirty enemies dead.
+
+    # Frampt swoops overhead.
+
+    EnableCharacter(CHR.FramptSwoop)
+    ForceAnimation(CHR.FramptSwoop, 7006, loop=False, wait_for_completion=False, skip_transition=True)
+    WaitFrames(240)
+    EnableCharacter(CHR.BlackEyeGough)
+    EnableInvincibility(CHR.BlackEyeGough)
+    ForceAnimation(CHR.FramptSwoop, 7008, loop=False, wait_for_completion=False, skip_transition=True)
+    WaitFrames(194)
+    DisableInvincibility(CHR.BlackEyeGough)
+    EnableBossHealthBar(CHR.BlackEyeGough, TEXT.GoughName)
+
+    await IsDead(CHR.BlackEyeGough)
+
+    DisableBossHealthBar(CHR.BlackEyeGough)
+
+    Wait(3.0)
+
+    # PHASE 3: Frampt, the Primordial Serpent-God
+
+    EnableMapSound(1213803)
+    EnableCharacter(CHR.FramptBoss)
+    EnableBossHealthBar(CHR.FramptBoss, name_id=4510)
+
+    await (HealthRatio(CHR.FramptBoss) <= 0.0)
+
+    Wait(2.0)
+    PlaySoundEffect(PLAYER, SoundType.v_voice, 215000006)
+
+    await IsDead(CHR.FramptBoss)
+
+    DisableBossHealthBar(CHR.FramptBoss)
+    DisableMapSound(1213803)
+    PlaySoundEffect(CHR.FramptBoss, SoundType.s_sfx, 777777777)
+
+    # If you weren't wearing the Ring of St. Jude (you masochist), you get a message and go back to Firelink.
+
+    if IsDead(CHR.Patches):
+        DisplayStatus(TEXT.HollowVictory)
+        Wait(5.0)
+        WarpToMap(FIRELINK_SHRINE)
+        return
+
+    # PHASE 4: Trusty Patches
+
+    DisplayBanner(TextBannerType.boss_defeated)
+    EnableImmortality(PLAYER)
+
+    # No more recovery.
+    StopEvent(11212010, slot=0)
+    StopEvent(11212010, slot=1)
+    StopEvent(11212010, slot=2)
+    StopEvent(11212010, slot=3)
+    StopEvent(11212010, slot=4)
+    StopEvent(11212010, slot=5)
+    StopEvent(11212010, slot=6)
+    StopEvent(11212020)  # Sif.
+
+    EnableCharacter(CHR.Solaire)
+    EnableCharacter(CHR.Siegmeyer)
+    EnableCharacter(CHR.Logan)
+    EnableCharacter(CHR.Ornstein)
+    EnableCharacter(CHR.Havel)
+    EnableCharacter(CHR.Quelana)
+    EnableCharacter(CHR.Patches)
+    EnableCharacter(CHR.Sif)
+
+    SetNest(CHR.Solaire, 1202680)
+    SetNest(CHR.Siegmeyer, 1202681)
+    SetNest(CHR.Logan, 1202682)
+    SetNest(CHR.Ornstein, 1202683)
+    SetNest(CHR.Havel, 1202684)
+    SetNest(CHR.Quelana, 1202685)
+    SetNest(CHR.Patches, 1202686)  # Most central position.
+    SetNest(CHR.Sif, 1202687)
+
+    await (EntityWithinDistance(CHR.Solaire, CHR.Patches, 15.0)
+           and EntityWithinDistance(CHR.Siegmeyer, CHR.Patches, 15.0)
+           and EntityWithinDistance(CHR.Logan, CHR.Patches, 15.0)
+           and EntityWithinDistance(CHR.Quelana, CHR.Patches, 15.0)
+           and EntityWithinDistance(CHR.Havel, CHR.Patches, 15.0)
+           and EntityWithinDistance(CHR.Sif, CHR.Patches, 15.0)
+           # and EntityWithinDistance(CHR.Ornstein, CHR.Patches, 15.0)  # Glitchy AI.
+           and EntityWithinDistance(PLAYER, CHR.Patches, 15.0))
+
+    DisableImmortality(CHR.Solaire)
+    DisableImmortality(CHR.Siegmeyer)
+    DisableImmortality(CHR.Logan)
+    DisableImmortality(CHR.Ornstein)
+    DisableImmortality(CHR.Havel)
+    DisableImmortality(CHR.Quelana)
+    DisableImmortality(CHR.Patches)
+    # Sif stays immortal.
+
+    Wait(2.0)
+    EnableMapSound(1213801)
+    Wait(2.0)
+
+    CreateTemporaryFX(15398, anchor_entity=CHR.Patches, model_point=1)
+    PlaySoundEffect(anchor_entity=CHR.Patches, sound_type=SoundType.s_sfx, sound_id=21199)
+    Kill(CHR.Solaire)
+    WaitFrames(5)
+    Kill(CHR.Siegmeyer)
+    WaitFrames(2)
+    Kill(CHR.Ornstein)
+    WaitFrames(10)
+    Kill(CHR.Quelana)
+    WaitFrames(5)
+    Kill(CHR.Logan)
+    WaitFrames(8)
+    Kill(CHR.Havel)
+
+    AddSpecialEffect(CHR.Patches, SPEFFECT.PatchesBuff)
+    AddSpecialEffect(CHR.Patches, 3231)  # Patches recovers.
+    AddSpecialEffect(CHR.Sif, 3231)  # Sif recovers.
+    AddSpecialEffect(CHR.Sif, 5401)  # Sif starts limping.
+    StopEvent(11212000, slot=2)  # No more regen for Patches.
+    CancelSpecialEffect(CHR.Patches, SPEFFECT.RingOfStJudeAlly)
+    SetTeamType(CHR.Patches, TeamType.boss)
+    EnableBossHealthBar(CHR.Patches, TEXT.PatchesName)
+
+    await (HealthRatio(CHR.Patches) <= 0.8)
+
+    DisableImmortality(CHR.Sif)
+    CreateTemporaryFX(15398, anchor_entity=CHR.Patches, model_point=10)
+    PlaySoundEffect(anchor_entity=CHR.Patches, sound_type=SoundType.s_sfx, sound_id=21199)
+    Kill(CHR.Sif)
+
+    Wait(5.0)
+    DisplayStatus(TEXT.RingBurns)
+
+    # Go crazy on Patches.
+
+    # AddSpecialEffect(PLAYER, SPEFFECT.RingOfStJudeStrong1)
+    # await (HealthRatio(CHR.Patches) <= 0.8)
+    # CancelSpecialEffect(PLAYER, SPEFFECT.RingOfStJudeStrong1)
+    # AddSpecialEffect(PLAYER, SPEFFECT.RingOfStJudeStrong2)
+    # await (HealthRatio(CHR.Patches) <= 0.7)
+    # CancelSpecialEffect(PLAYER, SPEFFECT.RingOfStJudeStrong2)
+    AddSpecialEffect(PLAYER, SPEFFECT.RingOfStJudeStrong3)
+    await (HealthRatio(CHR.Patches) <= 0.7)
+    CancelSpecialEffect(PLAYER, SPEFFECT.RingOfStJudeStrong3)
+    AddSpecialEffect(PLAYER, SPEFFECT.RingOfStJudeStrong4)
+    await (HealthRatio(CHR.Patches) <= 0.5)
+    CancelSpecialEffect(PLAYER, SPEFFECT.RingOfStJudeStrong4)
+    AddSpecialEffect(PLAYER, SPEFFECT.RingOfStJudeStrong5)
+
+    await IsDead(CHR.Patches)
+
+    DisableMapSound(1213801)
+
+    AwardItemLot(ITEMLOT.SerpentSoul)
+    EnableFlag(FLAG.AlliesKilled)
+    EnableFlag(FLAG.PatchesDead)
+    Wait(1.0)  # Can't give player time to use Serpent Soul.
+    WarpToMap(FIRELINK_SHRINE)
+
+
+@RestartOnRest
+def Event11210050():
+    """ 11210050: Event 11210050 """
+    EnableInvincibility(CHR.FramptBoss)
+    DisableCharacter(CHR.FramptBoss)
+
+    SkipLinesIfThisEventOn(9)
+    DisableAI(CHR.FramptBoss)
+    IfFlagOn(1, 11215062)  # Boss battle notification sent.
+    IfPlayerInsideRegion(1, 1212906)
+    IfStandingOnHitbox(-1, 1213003)  # Wait for player to stand in arena.
+    IfStandingOnHitbox(-1, 1213004)
+    IfStandingOnHitbox(-1, 1213009)
+    IfConditionTrue(1, input_condition=-1)
+    IfConditionTrue(0, input_condition=1)
+    EnableAI(CHR.FramptBoss)
+
+    DisableInvincibility(CHR.FramptBoss)
+    EnableBossHealthBar(CHR.FramptBoss, name_id=4510, slot=0)
+    EnableHitbox(1213001)
+
+
+@NeverRestart
+def Event11210005():
+    """ 11210005: Kalameet death. """
+    EndIfThisEventOn()
+    IfHealthLessThanOrEqual(0, CHR.FramptBoss, 0.0)
+    Wait(1.0)
+    PlaySoundEffect(anchor_entity=CHR.FramptBoss, sound_type=SoundType.s_sfx, sound_id=777777777)
+    IfDead(0, CHR.FramptBoss)
+    EnableFlag(11210005)
+    EnableFlag(121)
+    KillBoss(CHR.FramptBoss)
+    DisableObject(1211690)
+    DeleteFX(1211691, erase_root_only=True)
+    DisableHitbox(1213001)
+
+
+@NeverRestart
+def Event11210340():
+    """ 11210340: Event 11210340 """
+    SkipLinesIfThisEventOff(3)
+    EndIfFlagOn(11210341)
+    WarpToEntity(6760, destination=1212331, destination_type=Category.region, model_point=-1, copy_draw_hitbox=6760)
+    End()
+    IfHost(1)
+    IfEntityWithinDistance(-1, 6760, 10000, 7.0)
+    IfAttacked(-1, 6760, attacking_character=10000)
+    IfConditionTrue(1, input_condition=-1)
+    IfConditionTrue(0, input_condition=1)
+    ForceAnimation(6760, 7003, loop=False, wait_for_completion=True, skip_transition=False)
+    DisableCharacter(6760)
+    WarpToEntity(6760, destination=1212331, destination_type=Category.region, model_point=-1, copy_draw_hitbox=6760)
+    EnableCharacter(6760)
+
+
+@NeverRestart
+def Event11210341():
+    """ 11210341: Event 11210341 """
+    SkipLinesIfThisEventSlotOff(2)
+    WarpToEntity(6760, destination=1212332, destination_type=Category.region, model_point=-1, copy_draw_hitbox=6760)
+    End()
+    IfHost(1)
+    IfFlagOn(1, 11210340)
+    IfEntityWithinDistance(-1, 6760, 10000, 12.0)
+    IfAttacked(-1, 6760, attacking_character=10000)
+    IfConditionTrue(1, input_condition=-1)
+    IfConditionTrue(0, input_condition=1)
+    ForceAnimation(6760, 7003, loop=False, wait_for_completion=True, skip_transition=False)
+    DisableCharacter(6760)
+    WarpToEntity(6760, destination=1212332, destination_type=Category.region, model_point=-1, copy_draw_hitbox=6760)
+    EnableCharacter(6760)
+
+
+@NeverRestart
+def Event11210345():
+    """ 11210345: Event 11210345 """
+    SkipLinesIfThisEventOff(3)
+    DisableCharacter(6760)
+    DeleteFX(1213125, erase_root_only=False)
+    End()
+    IfHost(1)
+    IfFlagOn(1, 11210341)
+    IfEntityWithinDistance(-1, 6760, 10000, 12.0)
+    IfAttacked(-1, 6760, attacking_character=10000)
+    IfConditionTrue(1, input_condition=-1)
+    IfConditionTrue(0, input_condition=1)
+    ForceAnimation(6760, 7003, loop=False, wait_for_completion=True, skip_transition=False)
+    DisableCharacter(6760)
+    DeleteFX(1213125, erase_root_only=True)
+
+
+@NeverRestart
+def Event11210346():
+    """ 11210346: Event 11210346 """
+    DisableNetworkSync()
+    IfFlagOff(1, 11210345)
+    IfPlayerInsideRegion(1, 1212335)
+    IfFlagOn(2, 11210345)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(0, input_condition=-1)
+    EndIfFinishedConditionTrue(2)
+    AddSpecialEffect(10000, 4161)
+    Restart()
+
+
+@NeverRestart
+def Event11210347():
+    """ 11210347: Event 11210347 """
+    SkipLinesIfFlagOn(1, 11215045)
+    SkipLinesIfFlagOff(2, 11210345)
+    DisableObject(1211250)
+    End()
+    IfHost(1)
+    IfPlayerInsideRegion(1, 1212336)
+    IfConditionTrue(0, input_condition=1)
+    EnableFlag(11215045)
+    EndIfObjectDestroyed(1211250)
+    DisableObjectInvulnerability(1211250)
+    DestroyObject(1211250, slot=1)
+    ForceAnimation(1211250, 0, loop=False, wait_for_completion=False, skip_transition=False)
+    PlaySoundEffect(anchor_entity=1211250, sound_type=SoundType.o_object, sound_id=262000000)
+
+
+@RestartOnRest
+def SifLimping():
+    """ 11215043: Sif starts limping at 30% health, but recovers at 50%. """
+    await (HealthRatio(CHR.Sif) <= 0.3)
+    AddSpecialEffect(CHR.Sif, 5401)
+    await (HealthRatio(CHR.Sif) >= 0.5)
+    CancelSpecialEffect(CHR.Sif, 5401)
+    return RESTART
+
+
+@RestartOnRest
+def Event11210051():
+    """ 11210051: Kalameet appears over the basin for the first time (no fire). """
+    DisableAI(CHR.FramptSwoop)
+    EnableImmortality(CHR.FramptSwoop)
+    DisableGravity(CHR.FramptSwoop)
+    DisableCollision(CHR.FramptSwoop)
+    DisableCharacter(CHR.FramptSwoop)
+    SetNetworkUpdateAuthority(CHR.FramptSwoop, UpdateAuthority.forced)
+    SetNetworkUpdateRate(CHR.FramptSwoop, is_fixed=1, frequency=CharacterUpdateRate.always)
+
+    IfTrueFlagCountGreaterThanOrEqual(0, 30, 11215300, 11215355)
+
+    EnableCharacter(CHR.FramptSwoop)
+    ForceAnimation(CHR.FramptSwoop, 7006, loop=False, wait_for_completion=False, skip_transition=True)
+    WaitFrames(240)
+    ForceAnimation(CHR.FramptSwoop, 7008, loop=False, wait_for_completion=False, skip_transition=True)
+    WaitFrames(194)
+
+
+@RestartOnRest
+def Event11210052():
+    """ 11210052: Event 11210052 """
+
+    WaitFrames(6)
+    ForceAnimation(CHR.FramptSwoop, 7008, loop=False, wait_for_completion=False, skip_transition=True)
+    WaitFrames(194)
+
+    ForceAnimation(CHR.FramptSwoop, 7001, loop=False, wait_for_completion=False, skip_transition=True)
+    WaitFrames(269)
+
+    ForceAnimation(CHR.FramptSwoop, 7011, loop=False, wait_for_completion=False, skip_transition=True)
+    WaitFrames(514)
+
+    ForceAnimation(CHR.FramptSwoop, 7003, loop=False, wait_for_completion=False, skip_transition=True)
+    WaitFrames(414)
+
+    ForceAnimation(CHR.FramptSwoop, 7010, loop=False, wait_for_completion=False, skip_transition=True)
+    WaitFrames(561)
+
+    ForceAnimation(CHR.FramptSwoop, 7002, loop=False, wait_for_completion=False, skip_transition=True)
+    WaitFrames(461)
+
+    ForceAnimation(CHR.FramptSwoop, 7009, loop=False, wait_for_completion=False, skip_transition=True)
+    WaitFrames(30)
+
+
+@RestartOnRest
+def Event11215050():
+    """ 11215050: Kalameet control. """
+    IfPlayerInsideRegion(1, 1212057)
+    IfPlayerInsideRegion(2, 1212059)
+    IfAllPlayersOutsideRegion(2, 1212057)
+    IfPlayerInsideRegion(3, 1212058)
+    IfAllPlayersOutsideRegion(3, 1212057)
+    IfAllPlayersOutsideRegion(3, 1212059)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(-1, input_condition=3)
+    IfConditionTrue(4, input_condition=-1)
+    IfFlagOn(4, 11215063)
+    IfConditionTrue(0, input_condition=4)
+    SkipLinesIfFinishedConditionTrue(2, 1)
+    SkipLinesIfFinishedConditionTrue(3, 2)
+    SkipLinesIfFinishedConditionTrue(4, 3)
+    SetEventPoint(CHR.FramptBoss, region_id=1212060, reaction_range=2.0)
+    SkipLines(3)
+    SetEventPoint(CHR.FramptBoss, region_id=1212060, reaction_range=2.0)
+    SkipLines(1)
+    SetEventPoint(CHR.FramptBoss, region_id=1212061, reaction_range=2.0)
+    Wait(1.0)
+    Restart()
+
+
+@RestartOnRest
+def Event11215051():
+    """ 11215051: Kalameet tail cut. """
+    DisableCharacter(1210410)
+    SkipLinesIfFlagOn(7, 11215054)
+    SkipLinesIfThisEventSlotOff(4)
+    SetDisplayMask(CHR.FramptBoss, bit_index=0, switch_type=0)
+    SetHitboxMask(CHR.FramptBoss, bit_index=1, switch_type=1)
+    AICommand(CHR.FramptBoss, command_id=20, slot=0)
+    End()
+    IfBackreadEnabled(0, CHR.FramptBoss)
+    CreateNPCPart(CHR.FramptBoss, part_npc_type=4510, part_index=1, part_health=200, damage_correction=1.0, body_damage_correction=1.0, is_invincible=0, start_in_stop_state=0)
+    DisableFlag(11215054)
+    IfCharacterPartHealthLessThanOrEqual(1, CHR.FramptBoss, npc_part_type=4510, value=0)
+    IfHealthLessThanOrEqual(2, CHR.FramptBoss, 0.0)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(0, input_condition=-1)
+    EndIfFinishedConditionTrue(2)
+    SkipLinesIfFlagOff(3, 11215053)
+    SetNPCPartHealth(CHR.FramptBoss, part_npc_type=4510, desired_hp=10, overwrite_max=0)
+    EnableFlag(11215054)
+    Restart()
+    WarpToEntity(1210410, destination=CHR.FramptBoss, destination_type=Category.character, model_point=150, copy_draw_hitbox=CHR.FramptBoss)
+    EnableCharacter(1210410)
+    ResetAnimation(CHR.FramptBoss, disable_interpolation=False)
+    ForceAnimation(CHR.FramptBoss, 8000, loop=False, wait_for_completion=False, skip_transition=False)
+    ForceAnimation(1210410, 8100, loop=False, wait_for_completion=False, skip_transition=False)
+    SetDisplayMask(CHR.FramptBoss, bit_index=0, switch_type=0)
+    SetHitboxMask(CHR.FramptBoss, bit_index=1, switch_type=1)
+    AddSpecialEffect(CHR.FramptBoss, 5434)
+    AICommand(CHR.FramptBoss, command_id=20, slot=0)
+    ReplanAI(CHR.FramptBoss)
+    IfCharacterHuman(-7, PLAYER)
+    IfCharacterHollow(-7, PLAYER)
+    EndIfConditionFalse(-7)
+    # AwardItemLot(45110000, host_only=True)
+
+
+@RestartOnRest
+def Event11215052():
+    """ 11215052: Kalameet tail cut behavior. """
+    IfHasTAEEvent(0, CHR.FramptBoss, tae_event_id=10)
+    EnableFlag(11215053)
+    IfHasTAEEvent(0, CHR.FramptBoss, tae_event_id=20)
+    DisableFlag(11215053)
+    Restart()
+
+
+@NeverRestart
+def Event11210544():
+    """ 11210544: Destroy Chester's lamp. """
+    IfObjectDestroyed(0, 1211130)
+    DeleteFX(1213150, erase_root_only=True)
+
+
+@NeverRestart
+def Event11210700():
+    """ 11210700: Event 11210700 """
+    RunEvent(7999)
+    RunEvent(7998)
+    SkipLinesIfClient(1)
+    DisableFlagRange(11215350, 11215360)
+    DisableFlag(11215398)
+    DisableFlagRange(11215342, 11215345)
+    DeleteFX(1213403, erase_root_only=False)
+    DeleteFX(1213404, erase_root_only=False)
+    DeleteFX(1213405, erase_root_only=False)
+    DeleteFX(1213406, erase_root_only=False)
+    DeleteFX(1213407, erase_root_only=False)
+    DeleteFX(1213408, erase_root_only=False)
+    DeleteFX(1213409, erase_root_only=False)
+    DeleteFX(1213410, erase_root_only=False)
+    DeleteFX(1213411, erase_root_only=False)
+    DeleteFX(1213412, erase_root_only=False)
+    DeleteFX(1213416, erase_root_only=False)
+    DeleteFX(1213417, erase_root_only=False)
+    DeleteFX(1213418, erase_root_only=False)
+    DeleteFX(1213419, erase_root_only=False)
+    DeleteFX(1213420, erase_root_only=False)
+    DeleteFX(1213421, erase_root_only=False)
+    DeleteFX(1213422, erase_root_only=False)
+    DeleteFX(1213423, erase_root_only=False)
+    DeleteFX(1213424, erase_root_only=False)
+    DeleteFX(1213425, erase_root_only=False)
+    RunEvent(11210708)
+    RunEvent(11210838)
+    RunEvent(11210839)
+    RunEvent(11210875)
+    RunEvent(11210876)
+    RunEvent(11210830)
+    RunEvent(11210835, slot=0, args=(120.0, 60.0, 240.0, 120.0), arg_types='ffff')
+    RunEvent(11210836)
+    RunEvent(11210877)
+    RunEvent(11210878)
+    RunEvent(11215398)
+    RunEvent(11210705)
+    RunEvent(11210706)
+    RunEvent(11210707)
+    RunEvent(11210845)
+    RunEvent(11210846)
+    RunEvent(11210847)
+    RunEvent(11210848)
+    RunEvent(11210849)
+    RunEvent(11210837)
+    RunEvent(11210401)
+    RunEvent(11210402)
+    RunEvent(11210403)
+    RunEvent(11210404, slot=0, args=(7200,))
+    RunEvent(11210404, slot=1, args=(7450,))
+    RunEvent(11210404, slot=2, args=(7700,))
+    RunEvent(11210407)
+    RunEvent(11210439)
+    RunEvent(11210710, slot=0, args=(1211500, 1218215, 10010132, 1))
+    RunEvent(11210710, slot=1, args=(1211501, 1218213, 10010134, 1))
+    RunEvent(11210710, slot=2, args=(1211502, 1218211, 10010136, 1))
+    RunEvent(11210710, slot=3, args=(1211503, 1218214, 10010131, 1))
+    RunEvent(11210710, slot=4, args=(1211504, 1218212, 10010133, 1))
+    RunEvent(11210710, slot=5, args=(1211505, 1218210, 10010135, 1))
+    RunEvent(11210710, slot=6, args=(1211510, 1218200, 10010137, 0))
+    RunEvent(11210710, slot=7, args=(1211511, 1218200, 10010137, 0))
+    RunEvent(11210710, slot=8, args=(1211512, 1218200, 10010137, 0))
+    RunEvent(11210710, slot=9, args=(1211513, 1218200, 10010137, 0))
+    RunEvent(11210710, slot=10, args=(1211514, 1218200, 10010137, 0))
+    RunEvent(11210710, slot=11, args=(1211515, 1218200, 10010137, 0))
+    RunEvent(11210730, slot=0, args=(1212700, 4510))
+    RunEvent(11210730, slot=1, args=(1212701, 4511))
+    RunEvent(11210730, slot=2, args=(1212702, 4512))
+    RunEvent(11210730, slot=3, args=(1212703, 4513))
+    RunEvent(11210730, slot=4, args=(1212704, 4514))
+    RunEvent(11210730, slot=5, args=(1212705, 4515))
+    RunEvent(11210730, slot=6, args=(1212706, 4516))
+    RunEvent(11210730, slot=7, args=(1212707, 4517))
+    RunEvent(11210730, slot=8, args=(1212708, 4518))
+    RunEvent(11210730, slot=9, args=(1212709, 4519))
+    RunEvent(11210730, slot=10, args=(1212710, 4520))
+    RunEvent(11210730, slot=11, args=(1212711, 4521))
+    RunEvent(11210730, slot=12, args=(1212712, 4522))
+    RunEvent(11210730, slot=13, args=(1212713, 4523))
+    RunEvent(11210730, slot=14, args=(1212714, 4524))
+    RunEvent(11210730, slot=15, args=(1212715, 4525))
+    RunEvent(11210730, slot=16, args=(1212716, 4526))
+    RunEvent(11210730, slot=17, args=(1212717, 4527))
+    RunEvent(11210730, slot=18, args=(1212718, 4528))
+    RunEvent(11210730, slot=19, args=(1212719, 4529))
+    RunEvent(11210730, slot=20, args=(1212720, 4530))
+    RunEvent(11210730, slot=21, args=(1212721, 4531))
+    RunEvent(11210730, slot=22, args=(1212722, 4532))
+    RunEvent(11210730, slot=23, args=(1212723, 4533))
+    RunEvent(11210730, slot=24, args=(1212724, 4534))
+    RunEvent(11210730, slot=25, args=(1212725, 4535))
+    RunEvent(11210410, slot=0, args=(1212722, 11215350, 1213422, 11215355, 11215360))
+    RunEvent(11210410, slot=1, args=(1212723, 11215351, 1213423, 11215356, 11215361))
+    RunEvent(11210410, slot=2, args=(1212724, 11215352, 1213424, 11215357, 11215362))
+    RunEvent(11210410, slot=3, args=(1212725, 11215353, 1213425, 11215358, 11215363))
+    RunEvent(11210410, slot=4, args=(1212718, 11215350, 1213418, 11215355, 11215360))
+    RunEvent(11210410, slot=5, args=(1212719, 11215351, 1213419, 11215356, 11215361))
+    RunEvent(11210410, slot=6, args=(1212720, 11215352, 1213420, 11215357, 11215362))
+    RunEvent(11210410, slot=7, args=(1212721, 11215353, 1213421, 11215358, 11215363))
+    RunEvent(11210410, slot=8, args=(1212716, 11215350, 1213416, 11215355, 11215360))
+    RunEvent(11210410, slot=9, args=(1212717, 11215352, 1213417, 11215357, 11215362))
+    RunEvent(11210410, slot=10, args=(1212709, 11215350, 1213409, 11215355, 11215360))
+    RunEvent(11210410, slot=11, args=(1212710, 11215351, 1213410, 11215356, 11215361))
+    RunEvent(11210410, slot=12, args=(1212711, 11215352, 1213411, 11215357, 11215362))
+    RunEvent(11210410, slot=13, args=(1212712, 11215353, 1213412, 11215358, 11215363))
+    RunEvent(11210410, slot=14, args=(1212705, 11215350, 1213405, 11215355, 11215360))
+    RunEvent(11210410, slot=15, args=(1212706, 11215351, 1213406, 11215356, 11215361))
+    RunEvent(11210410, slot=16, args=(1212707, 11215352, 1213407, 11215357, 11215362))
+    RunEvent(11210410, slot=17, args=(1212708, 11215353, 1213408, 11215358, 11215363))
+    RunEvent(11210410, slot=18, args=(1212703, 11215350, 1213403, 11215355, 11215360))
+    RunEvent(11210410, slot=19, args=(1212704, 11215352, 1213404, 11215357, 11215362))
+    RunEvent(11210800, slot=0, args=(1212722, 11215350))
+    RunEvent(11210800, slot=1, args=(1212723, 11215351))
+    RunEvent(11210800, slot=2, args=(1212724, 11215352))
+    RunEvent(11210800, slot=3, args=(1212725, 11215353))
+    RunEvent(11210800, slot=4, args=(1212718, 11215350))
+    RunEvent(11210800, slot=5, args=(1212719, 11215351))
+    RunEvent(11210800, slot=6, args=(1212720, 11215352))
+    RunEvent(11210800, slot=7, args=(1212721, 11215353))
+    RunEvent(11210800, slot=8, args=(1212716, 11215350))
+    RunEvent(11210800, slot=9, args=(1212717, 11215352))
+    RunEvent(11210800, slot=10, args=(1212709, 11215350))
+    RunEvent(11210800, slot=11, args=(1212710, 11215351))
+    RunEvent(11210800, slot=12, args=(1212711, 11215352))
+    RunEvent(11210800, slot=13, args=(1212712, 11215353))
+    RunEvent(11210800, slot=14, args=(1212705, 11215350))
+    RunEvent(11210800, slot=15, args=(1212706, 11215351))
+    RunEvent(11210800, slot=16, args=(1212707, 11215352))
+    RunEvent(11210800, slot=17, args=(1212708, 11215353))
+    RunEvent(11210800, slot=18, args=(1212703, 11215350))
+    RunEvent(11210800, slot=19, args=(1212704, 11215352))
+    RunEvent(11210820, slot=0, args=(11215350, 11215360, 11210825, 0))
+    RunEvent(11210820, slot=1, args=(11215351, 11215361, 11210825, 1))
+    RunEvent(11210820, slot=2, args=(11215352, 11215362, 11210825, 2))
+    RunEvent(11210820, slot=3, args=(11215353, 11215363, 11210825, 3))
+    RunEvent(11210825, slot=0, args=(11215360, 11215370))
+    RunEvent(11210825, slot=1, args=(11215361, 11215371))
+    RunEvent(11210825, slot=2, args=(11215362, 11215372))
+    RunEvent(11210825, slot=3, args=(11215363, 11215373))
+    RunEvent(11210701, slot=0, args=(11215350, 11215300, 11215312, 11215318, 11215306))
+    RunEvent(11210701, slot=1, args=(11215351, 11215306, 11215312, 11215318, 11215300))
+    RunEvent(11210701, slot=2, args=(11215352, 11215312, 11215300, 11215306, 11215318))
+    RunEvent(11210701, slot=3, args=(11215353, 11215318, 11215300, 11215306, 11215312))
+    RunEvent(11210434)
+    RunEvent(11210430, slot=0, args=(11215350, 11215300, 11215312))
+    RunEvent(11210430, slot=1, args=(11215351, 11215306, 11215312))
+    RunEvent(11210430, slot=2, args=(11215352, 11215312, 11215300))
+    RunEvent(11210430, slot=3, args=(11215353, 11215318, 11215300))
+    RunEvent(11210435, slot=0, args=(11215350, 11215300, 11215312, 11215318, 11215306))
+    RunEvent(11210435, slot=1, args=(11215351, 11215306, 11215312, 11215318, 11215300))
+    RunEvent(11210435, slot=2, args=(11215352, 11215312, 11215300, 11215306, 11215318))
+    RunEvent(11210435, slot=3, args=(11215353, 11215318, 11215300, 11215306, 11215312))
+    RunEvent(11210870, slot=0, args=(11215350, 11215300, 11215312, 11215318, 11215306))
+    RunEvent(11210870, slot=1, args=(11215351, 11215306, 11215312, 11215318, 11215300))
+    RunEvent(11210870, slot=2, args=(11215352, 11215312, 11215300, 11215306, 11215318))
+    RunEvent(11210870, slot=3, args=(11215353, 11215318, 11215300, 11215306, 11215312))
+    RunEvent(11210831, slot=0, args=(11215360, 11215300, 11215305))
+    RunEvent(11210831, slot=1, args=(11215361, 11215306, 11215311))
+    RunEvent(11210831, slot=2, args=(11215362, 11215312, 11215317))
+    RunEvent(11210831, slot=3, args=(11215363, 11215318, 11215323))
+    RunEvent(11210760, slot=0, args=(1212711, 1211520, 1213202, 11215372))
+    RunEvent(11210760, slot=1, args=(1212712, 1211521, 1213203, 11215373))
+    RunEvent(11210760, slot=2, args=(1212709, 1211522, 1213200, 11215370))
+    RunEvent(11210760, slot=3, args=(1212710, 1211523, 1213201, 11215371))
+    RunEvent(11210760, slot=4, args=(1212707, 1211530, 1213212, 11215372))
+    RunEvent(11210760, slot=5, args=(1212708, 1211531, 1213213, 11215373))
+    RunEvent(11210760, slot=6, args=(1212705, 1211532, 1213210, 11215370))
+    RunEvent(11210760, slot=7, args=(1212706, 1211533, 1213211, 11215371))
+    RunEvent(11210760, slot=8, args=(1212704, 1211540, 1213222, 11215372))
+    RunEvent(11210760, slot=9, args=(1212703, 1211542, 1213220, 11215370))
+    RunEvent(11210760, slot=10, args=(1212724, 1211550, 1213232, 11215372))
+    RunEvent(11210760, slot=11, args=(1212725, 1211551, 1213233, 11215373))
+    RunEvent(11210760, slot=12, args=(1212722, 1211552, 1213230, 11215370))
+    RunEvent(11210760, slot=13, args=(1212723, 1211553, 1213231, 11215371))
+    RunEvent(11210760, slot=14, args=(1212720, 1211560, 1213242, 11215372))
+    RunEvent(11210760, slot=15, args=(1212721, 1211561, 1213243, 11215373))
+    RunEvent(11210760, slot=16, args=(1212718, 1211562, 1213240, 11215370))
+    RunEvent(11210760, slot=17, args=(1212719, 1211563, 1213241, 11215371))
+    RunEvent(11210760, slot=18, args=(1212717, 1211570, 1213252, 11215372))
+    RunEvent(11210760, slot=19, args=(1212716, 1211572, 1213250, 11215370))
+    RunEvent(11210780, slot=0, args=(1212711, 1211420, 1213302, 11215362))
+    RunEvent(11210780, slot=1, args=(1212712, 1211421, 1213303, 11215363))
+    RunEvent(11210780, slot=2, args=(1212709, 1211422, 1213300, 11215360))
+    RunEvent(11210780, slot=3, args=(1212710, 1211423, 1213301, 11215361))
+    RunEvent(11210780, slot=4, args=(1212707, 1211430, 1213302, 11215362))
+    RunEvent(11210780, slot=5, args=(1212708, 1211431, 1213303, 11215363))
+    RunEvent(11210780, slot=6, args=(1212705, 1211432, 1213300, 11215360))
+    RunEvent(11210780, slot=7, args=(1212706, 1211433, 1213301, 11215361))
+    RunEvent(11210780, slot=8, args=(1212704, 1211440, 1213302, 11215362))
+    RunEvent(11210780, slot=9, args=(1212703, 1211442, 1213300, 11215360))
+    RunEvent(11210780, slot=10, args=(1212724, 1211450, 1213302, 11215362))
+    RunEvent(11210780, slot=11, args=(1212725, 1211451, 1213303, 11215363))
+    RunEvent(11210780, slot=12, args=(1212722, 1211452, 1213300, 11215360))
+    RunEvent(11210780, slot=13, args=(1212723, 1211453, 1213301, 11215361))
+    RunEvent(11210780, slot=14, args=(1212720, 1211460, 1213302, 11215362))
+    RunEvent(11210780, slot=15, args=(1212721, 1211461, 1213303, 11215363))
+    RunEvent(11210780, slot=16, args=(1212718, 1211462, 1213300, 11215360))
+    RunEvent(11210780, slot=17, args=(1212719, 1211463, 1213301, 11215361))
+    RunEvent(11210780, slot=18, args=(1212717, 1211470, 1213302, 11215362))
+    RunEvent(11210780, slot=19, args=(1212716, 1211472, 1213300, 11215360))
+    RunEvent(11210840, slot=0, args=(11215350, 11215370, 11215375, 11215300, 11215306, 150070))
+    RunEvent(11210840, slot=1, args=(11215351, 11215371, 11215376, 11215306, 11215300, 150071))
+    RunEvent(11210840, slot=2, args=(11215352, 11215372, 11215377, 11215312, 11215318, 150072))
+    RunEvent(11210840, slot=3, args=(11215353, 11215373, 11215378, 11215318, 11215312, 150073))
+    RunEvent(11210850, slot=0, args=(11215350, 11215375, 1212700, 1212703))
+    RunEvent(11210850, slot=1, args=(11215352, 11215377, 1212700, 1212704))
+    RunEvent(11210850, slot=2, args=(11215350, 11215375, 1212701, 1212705))
+    RunEvent(11210850, slot=3, args=(11215351, 11215376, 1212701, 1212706))
+    RunEvent(11210850, slot=4, args=(11215352, 11215377, 1212701, 1212707))
+    RunEvent(11210850, slot=5, args=(11215353, 11215378, 1212701, 1212708))
+    RunEvent(11210850, slot=6, args=(11215350, 11215375, 1212702, 1212709))
+    RunEvent(11210850, slot=7, args=(11215351, 11215376, 1212702, 1212710))
+    RunEvent(11210850, slot=8, args=(11215352, 11215377, 1212702, 1212711))
+    RunEvent(11210850, slot=9, args=(11215353, 11215378, 1212702, 1212712))
+    RunEvent(11210850, slot=10, args=(11215350, 11215375, 1212713, 1212716))
+    RunEvent(11210850, slot=11, args=(11215352, 11215377, 1212713, 1212717))
+    RunEvent(11210850, slot=12, args=(11215350, 11215375, 1212714, 1212718))
+    RunEvent(11210850, slot=13, args=(11215351, 11215376, 1212714, 1212719))
+    RunEvent(11210850, slot=14, args=(11215352, 11215377, 1212714, 1212720))
+    RunEvent(11210850, slot=15, args=(11215353, 11215378, 1212714, 1212721))
+    RunEvent(11210850, slot=16, args=(11215350, 11215375, 1212715, 1212722))
+    RunEvent(11210850, slot=17, args=(11215351, 11215376, 1212715, 1212723))
+    RunEvent(11210850, slot=18, args=(11215352, 11215377, 1212715, 1212724))
+    RunEvent(11210850, slot=19, args=(11215353, 11215378, 1212715, 1212725))
+    RunEvent(11210886, slot=0, args=(11215350, 11215375))
+    RunEvent(11210886, slot=1, args=(11215351, 11215376))
+    RunEvent(11210886, slot=2, args=(11215352, 11215377))
+    RunEvent(11210886, slot=3, args=(11215353, 11215378))
+    RunEvent(11210880, slot=0, args=(1212700, 1212703))
+    RunEvent(11210880, slot=1, args=(1212701, 1212705))
+    RunEvent(11210880, slot=2, args=(1212702, 1212709))
+    RunEvent(11210880, slot=3, args=(1212713, 1212716))
+    RunEvent(11210880, slot=4, args=(1212714, 1212718))
+    RunEvent(11210880, slot=5, args=(1212715, 1212722))
+    RunEvent(11210890, slot=0, args=(1212730, 1218215))
+    RunEvent(11210890, slot=1, args=(1212731, 1218213))
+    RunEvent(11210890, slot=2, args=(1212732, 1218211))
+    RunEvent(11210890, slot=3, args=(1212733, 1218214))
+    RunEvent(11210890, slot=4, args=(1212734, 1218212))
+    RunEvent(11210890, slot=5, args=(1212735, 1218210))
+
+
+@NeverRestart
+def Event11210708():
+    """ 11210708: Event 11210708 """
+    EndIfThisEventOn()
+    IfPlayerInsideRegion(-1, 1212700)
+    IfPlayerInsideRegion(-1, 1212701)
+    IfPlayerInsideRegion(-1, 1212702)
+    IfPlayerInsideRegion(-1, 1212713)
+    IfPlayerInsideRegion(-1, 1212714)
+    IfPlayerInsideRegion(-1, 1212715)
+    IfConditionTrue(1, input_condition=-1)
+    IfConditionTrue(0, input_condition=1)
+    IfPlayerOwnsGood(2, 118, including_box=False)
+    EndIfConditionTrue(2)
+    AwardItemLot(2200, host_only=False)
+
+
+@NeverRestart
+def Event11210710(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11210710: Event 11210710 """
+    IfDialogPromptActivated(0, prompt_text=ARG_8_11, anchor_entity=ARG_0_3, anchor_type=Category.object, facing_angle=180.0, max_distance=2.0, model_point=100, human_or_hollow_only=True)
+    EnableFlag(11215341)
+    EnableFlag(11210709)
+    RotateToFaceEntity(10000, ARG_0_3)
+    ForceAnimation(10000, 7114, loop=False, wait_for_completion=False, skip_transition=False)
+    Wait(0.699999988079071)
+    CreateTemporaryFX(90021, anchor_entity=10000, anchor_type=Category.character, model_point=17)
+    Wait(1.5)
+    IfHealthEqual(1, 10000, 0.0)
+    EndIfConditionTrue(1)
+    SkipLinesIfEqual(1, left_value=0, right_value=ARG_12_15)
+    DisableFlagRange(7000, 7799)
+    SkipLinesIfEqual(1, left_value=1, right_value=ARG_12_15)
+    ArenaExitRequest()
+    DisableFlagRange(8140, 8146)
+    WarpToMap(OOLACILE, player_entity_id=ARG_4_7)
+
+
+@NeverRestart
+def Event11210730(ARG_0_3: int, ARG_4_7: int):
+    """ 11210730: Event 11210730 """
+    DisableNetworkSync()
+    IfFlagOff(1, 11215390)
+    IfFlagOff(1, 765)
+    IfPlayerInsideRegion(1, ARG_0_3)
+    IfConditionTrue(0, input_condition=1)
+    AddSpecialEffect(10000, ARG_4_7)
+    WaitFrames(10)
+    Restart()
+
+
+@NeverRestart
+def Event11210878():
+    """ 11210878: Event 11210878 """
+    DisableNetworkSync()
+    IfPlayerInsideRegion(-1, 1212700)
+    IfPlayerInsideRegion(-1, 1212701)
+    IfPlayerInsideRegion(-1, 1212702)
+    IfPlayerInsideRegion(-1, 1212713)
+    IfPlayerInsideRegion(-1, 1212714)
+    IfPlayerInsideRegion(-1, 1212715)
+    IfConditionTrue(1, input_condition=-1)
+    IfConditionTrue(0, input_condition=1)
+    AddSpecialEffect(10000, 4610)
+    SkipLinesIfFlagOn(1, 11215398)
+    AddSpecialEffect(10000, 4613)
+    Wait(1.0)
+    Restart()
+
+
+@NeverRestart
+def Event11215398():
+    """ 11215398: Event 11215398 """
+    DisableNetworkSync()
+    IfPlayerInsideRegion(-1, 1212740)
+    IfPlayerInsideRegion(-1, 1212741)
+    IfConditionTrue(0, input_condition=-1)
+    CancelSpecialEffect(10000, 4613)
+    Restart()
+
+
+@NeverRestart
+def Event11210875():
+    """ 11210875: Event 11210875 """
+    DisableNetworkSync()
+    IfMultiplayer(1)
+    IfPlayerInsideRegion(-1, 1212703)
+    IfPlayerInsideRegion(-1, 1212704)
+    IfPlayerInsideRegion(-1, 1212705)
+    IfPlayerInsideRegion(-1, 1212706)
+    IfPlayerInsideRegion(-1, 1212707)
+    IfPlayerInsideRegion(-1, 1212708)
+    IfPlayerInsideRegion(-1, 1212709)
+    IfPlayerInsideRegion(-1, 1212710)
+    IfPlayerInsideRegion(-1, 1212711)
+    IfPlayerInsideRegion(-1, 1212712)
+    IfPlayerInsideRegion(-1, 1212716)
+    IfPlayerInsideRegion(-1, 1212717)
+    IfPlayerInsideRegion(-1, 1212718)
+    IfPlayerInsideRegion(-1, 1212719)
+    IfPlayerInsideRegion(-1, 1212720)
+    IfPlayerInsideRegion(-1, 1212721)
+    IfPlayerInsideRegion(-1, 1212722)
+    IfPlayerInsideRegion(-1, 1212723)
+    IfPlayerInsideRegion(-1, 1212724)
+    IfPlayerInsideRegion(-1, 1212725)
+    IfConditionTrue(1, input_condition=-1)
+    IfConditionTrue(0, input_condition=1)
+    EnableFlag(11215394)
+    EnableInvincibility(10000)
+    AddSpecialEffect(10000, 90000)
+    Wait(4.0)
+    RestartEvent(11210876, slot=0)
+    Restart()
+
+
+@NeverRestart
+def Event11210876():
+    """ 11210876: Event 11210876 """
+    DisableNetworkSync()
+    IfFlagOn(0, 11215394)
+    Wait(5.0)
+    DisableFlag(11215394)
+    SkipLinesIfFlagOn(2, 11215391)
+    DisableInvincibility(10000)
+    CancelSpecialEffect(10000, 90000)
+    Restart()
+
+
+@NeverRestart
+def Event11210780(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11210780: Event 11210780 """
+    SkipLinesIfHost(1)
+    SkipLinesIfFlagOn(9, ARG_12_15)
+    EndOfAnimation(ARG_4_7, 1)
+    DisableHitbox(ARG_8_11)
+    IfMultiplayer(1)
+    IfPlayerInsideRegion(-1, ARG_0_3)
+    IfFlagOn(-1, ARG_12_15)
+    IfConditionTrue(1, input_condition=-1)
+    IfConditionTrue(0, input_condition=1)
+    EnableHitbox(ARG_8_11)
+    ForceAnimation(ARG_4_7, 0, loop=False, wait_for_completion=True, skip_transition=False)
+    IfFlagOff(2, 11215340)
+    IfSinglePlayer(-2)
+    IfFlagOff(3, ARG_12_15)
+    IfAllPlayersOutsideRegion(3, ARG_0_3)
+    IfConditionTrue(-2, input_condition=3)
+    IfConditionTrue(2, input_condition=-2)
+    IfConditionTrue(0, input_condition=2)
+    ForceAnimation(ARG_4_7, 1, loop=False, wait_for_completion=True, skip_transition=False)
+    Restart()
+
+
+@NeverRestart
+def Event11210410(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int, ARG_16_19: int):
+    """ 11210410: Event 11210410 """
+    SkipLinesIfFlagOn(10, ARG_12_15)
+    IfFlagOff(1, 765)
+    IfFlagOff(1, 11215390)
+    IfFlagOn(1, ARG_4_7)
+    IfPlayerInsideRegion(1, ARG_0_3)
+    IfFlagOn(5, ARG_16_19)
+    IfFlagOff(5, 11215390)
+    IfTimeElapsed(5, 15.0)
+    IfConditionTrue(-2, input_condition=1)
+    IfConditionTrue(-2, input_condition=5)
+    IfConditionTrue(0, input_condition=-2)
+    EnableFlag(ARG_12_15)
+    SkipLinesIfMultiplayer(1)
+    DisplayBattlefieldMessage(150000, display_location_index=1)
+    CreateFX(ARG_8_11)
+    SkipLinesIfFlagOff(11, ARG_12_15)
+    IfFlagOn(2, ARG_4_7)
+    IfPlayerOutsideRegion(2, ARG_0_3)
+    IfMultiplayer(3)
+    IfFlagOff(3, ARG_16_19)
+    IfTimeElapsed(3, 5.0)
+    IfSinglePlayer(4)
+    IfFlagOff(4, ARG_4_7)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(-1, input_condition=3)
+    IfConditionTrue(-1, input_condition=4)
+    IfConditionTrue(0, input_condition=-1)
+    DisableFlag(ARG_12_15)
+    DeleteFX(ARG_8_11, erase_root_only=True)
+    Restart()
+
+
+@NeverRestart
+def Event11210800(ARG_0_3: int, ARG_4_7: int):
+    """ 11210800: Event 11210800 """
+    DisableNetworkSync()
+    IfPlayerInsideRegion(0, ARG_0_3)
+    DisableFlagRange(11215350, 11215353)
+    EnableFlag(ARG_4_7)
+    IfFlagOff(0, ARG_4_7)
+    Restart()
+
+
+@NeverRestart
+def Event11210820(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11210820: Event 11210820 """
+    IfMultiplayer(1)
+    SkipLinesIfEqual(1, left_value=ARG_0_3, right_value=11215350)
+    IfClient(1)
+    IfFlagOn(1, ARG_0_3)
+    IfTimeElapsed(1, 3.0)
+    IfConditionTrue(0, input_condition=1)
+    EnableFlag(ARG_4_7)
+    RestartEvent(ARG_8_11, slot=ARG_12_15)
+    Restart()
+
+
+@NeverRestart
+def Event11210825(ARG_0_3: int, ARG_4_7: int):
+    """ 11210825: Event 11210825 """
+    DisableNetworkSync()
+    IfFlagOn(1, ARG_0_3)
+    IfTimeElapsed(1, 10.0)
+    IfConditionTrue(0, input_condition=1)
+    RestartIfFlagOn(ARG_4_7)
+    DisableFlag(ARG_0_3)
+    Restart()
+
+
+@NeverRestart
+def Event11210830():
+    """ 11210830: Event 11210830 """
+    IfPlayerInsideRegion(1, 1212715)
+    IfFlagRangeAllOn(1, 11215360, 11215363)
+    IfPlayerInsideRegion(2, 1212702)
+    IfFlagRangeAllOn(2, 11215360, 11215363)
+    IfPlayerInsideRegion(3, 1212714)
+    IfFlagRangeAllOn(3, 11215360, 11215363)
+    IfPlayerInsideRegion(4, 1212701)
+    IfFlagRangeAllOn(4, 11215360, 11215363)
+    IfPlayerInsideRegion(5, 1212713)
+    IfFlagOn(5, 11215360)
+    IfFlagOn(5, 11215362)
+    IfPlayerInsideRegion(6, 1212700)
+    IfFlagOn(6, 11215360)
+    IfFlagOn(6, 11215362)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(-1, input_condition=3)
+    IfConditionTrue(-1, input_condition=4)
+    IfConditionTrue(-1, input_condition=5)
+    IfConditionTrue(-1, input_condition=6)
+    IfConditionTrue(0, input_condition=-1)
+    EnableFlag(11215340)
+    SkipLinesIfFinishedConditionTrue(2, 3)
+    SkipLinesIfFinishedConditionTrue(1, 4)
+    SkipLines(1)
+    EnableFlag(11215392)
+    SkipLinesIfFinishedConditionTrue(2, 1)
+    SkipLinesIfFinishedConditionTrue(1, 2)
+    SkipLines(1)
+    EnableFlag(11215395)
+    Wait(8.0)
+    SkipLinesIfFlagOn(3, 11215395)
+    SkipLinesIfFlagOn(2, 11215392)
+    DisplayBattlefieldMessage(150215, display_location_index=1)
+    SkipLines(1)
+    DisplayBattlefieldMessage(150205, display_location_index=1)
+    Wait(2.0)
+    EnableFlag(11215390)
+    IfFlagOff(0, 11215390)
+    Restart()
+
+
+@NeverRestart
+def Event11210831(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int):
+    """ 11210831: Event 11210831 """
+    IfHost(1)
+    IfFlagOn(1, 11215390)
+    IfFlagOff(1, ARG_0_3)
+    IfFlagRangeAnyOff(1, ARG_4_7, ARG_8_11)
+    IfConditionTrue(0, input_condition=1)
+    SkipLinesIfFlagOn(1, 11215392)
+    EnableFlagRange(ARG_4_7, ARG_8_11)
+
+
+@NeverRestart
+def Event11210835(ARG_0_3: float, ARG_4_7: float, ARG_8_11: float, ARG_12_15: float):
+    """ 11210835: Event 11210835 """
+    DisableNetworkSync()
+    IfHost(1)
+    IfFlagOff(1, 11215391)
+    IfFlagOn(1, 11215390)
+    IfConditionTrue(0, input_condition=1)
+    SkipLinesIfFlagOn(3, 11215395)
+    SkipLinesIfFlagOn(2, 11215392)
+    Wait(ARG_0_3)
+    SkipLines(1)
+    Wait(ARG_8_11)
+    EnableFlag(11215396)
+    SkipLinesIfFlagOn(3, 11215395)
+    SkipLinesIfFlagOn(2, 11215392)
+    Wait(ARG_4_7)
+    SkipLines(1)
+    Wait(ARG_12_15)
+    IfFlagOff(0, 904)
+    EnableFlag(11215391)
+    Restart()
+
+
+@NeverRestart
+def Event11210836():
+    """ 11210836: Event 11210836 """
+    IfFlagOn(0, 11215396)
+    EnableFlag(11215396)
+    SkipLinesIfFlagOn(3, 11215395)
+    SkipLinesIfFlagOn(2, 11215392)
+    DisplayBattlefieldMessage(150115, display_location_index=0)
+    SkipLines(1)
+    DisplayBattlefieldMessage(150105, display_location_index=0)
+    IfFlagOn(0, 11215391)
+    EnableFlag(11215391)
+    DisplayBattlefieldMessage(150300, display_location_index=0)
+    IfFlagOff(0, 11215391)
+    Restart()
+
+
+@NeverRestart
+def Event11210760(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11210760: Event 11210760 """
+    IfFlagOn(1, 11215390)
+    IfFlagOff(1, ARG_12_15)
+    IfPlayerInsideRegion(1, ARG_0_3)
+    IfConditionTrue(0, input_condition=1)
+    Wait(1.0)
+    DisableHitbox(ARG_8_11)
+    ForceAnimation(ARG_4_7, 1, loop=False, wait_for_completion=True, skip_transition=False)
+    EnableHitbox(ARG_8_11)
+    Restart()
+
+
+@NeverRestart
+def Event11210840(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int, ARG_16_19: int, ARG_20_23: int):
+    """ 11210840: Event 11210840 """
+    IfFlagOn(1, ARG_0_3)
+    IfFlagOn(1, 11215390)
+    IfFlagOff(1, 11215391)
+    IfHealthValueEqual(1, 10000, 1)
+    IfConditionTrue(0, input_condition=1)
+    EnableInvincibility(10000)
+    AddSpecialEffect(10000, 101)
+    AddSpecialEffect(10000, 102)
+    AddSpecialEffect(10000, 103)
+    AddSpecialEffect(10000, 104)
+    AddSpecialEffect(10000, 4611)
+    SkipLinesIfFlagOn(2, ARG_0_3)
+    DisplayBattlefieldMessage(ARG_20_23, display_location_index=1)
+    SkipLines(1)
+    DisplayBattlefieldMessage(150023, display_location_index=1)
+    IncrementEventValue(ARG_12_15, bit_count=6, max_value=63)
+    SkipLinesIfFlagOff(1, 11215392)
+    IncrementEventValue(ARG_16_19, bit_count=6, max_value=63)
+    Wait(3.0)
+    EnableFlag(ARG_4_7)
+    EnableFlag(ARG_8_11)
+    IfFlagOff(0, ARG_8_11)
+    DisableFlag(ARG_8_11)
+    SkipLinesIfFlagOn(1, ARG_0_3)
+    DisableInvincibility(10000)
+    CancelSpecialEffect(10000, 4611)
+    ResetAnimation(10000, disable_interpolation=True)
+    ForceAnimation(10000, 6950, loop=False, wait_for_completion=True, skip_transition=False)
+    DisableFlag(ARG_4_7)
+    Restart()
+
+
+@NeverRestart
+def Event11210850(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11210850: Event 11210850 """
+    DisableNetworkSync()
+    IfFlagOn(1, ARG_0_3)
+    IfFlagOn(1, ARG_4_7)
+    IfPlayerInsideRegion(1, ARG_8_11)
+    IfConditionTrue(0, input_condition=1)
+    PlayCutscene(cutscene_id=120130, skippable=False, fade_out=False, warp_to_region=ARG_12_15, warp_to_map=OOLACILE)
+    WaitFrames(1)
+    EqualRecovery()
+    DisableFlag(ARG_4_7)
+    Restart()
+
+
+@NeverRestart
+def Event11210886(ARG_0_3: int, ARG_4_7: int):
+    """ 11210886: Event 11210886 """
+    IfFlagOn(1, ARG_0_3)
+    IfFlagOn(1, ARG_4_7)
+    IfConditionTrue(0, input_condition=1)
+    SkipLinesIfFlagOn(1, ARG_0_3)
+    DisableCharacter(10000)
+    IfFlagOn(2, ARG_0_3)
+    IfFlagOff(2, ARG_4_7)
+    IfTimeElapsed(2, 2.0)
+    IfConditionTrue(0, input_condition=2)
+    SkipLinesIfFlagOn(1, ARG_0_3)
+    EnableCharacter(10000)
+    Restart()
+
+
+@NeverRestart
+def Event11210870(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int, ARG_16_19: int):
+    """ 11210870: Event 11210870 """
+    DisableNetworkSync()
+    IfFlagOn(1, ARG_0_3)
+    IfFlagOn(1, 11215390)
+    IfFlagOn(1, 11215391)
+    IfConditionTrue(0, input_condition=1)
+    EnableInvincibility(10000)
+    AddSpecialEffect(10000, 90000)
+    Wait(6.0)
+    EnableFlag(11215397)
+    IfEventComparison(2, ARG_4_7, 6, 3, ARG_8_11, 6)
+    IfEventComparison(2, ARG_4_7, 6, 3, ARG_12_15, 6)
+    SkipLinesIfFlagOn(1, 11215392)
+    IfEventComparison(2, ARG_4_7, 6, 3, ARG_16_19, 6)
+    IfEventComparison(-1, ARG_4_7, 6, 2, ARG_8_11, 6)
+    IfEventComparison(-1, ARG_4_7, 6, 2, ARG_12_15, 6)
+    SkipLinesIfFlagOn(1, 11215392)
+    IfEventComparison(-1, ARG_4_7, 6, 2, ARG_16_19, 6)
+    IfEventComparison(3, ARG_4_7, 6, 0, ARG_8_11, 6)
+    SkipLinesIfFlagOn(8, 11215392)
+    IfEventComparison(3, ARG_4_7, 6, 3, ARG_12_15, 6)
+    IfEventComparison(3, ARG_4_7, 6, 3, ARG_16_19, 6)
+    IfEventComparison(4, ARG_4_7, 6, 3, ARG_8_11, 6)
+    IfEventComparison(4, ARG_4_7, 6, 0, ARG_12_15, 6)
+    IfEventComparison(4, ARG_4_7, 6, 3, ARG_16_19, 6)
+    IfEventComparison(5, ARG_4_7, 6, 3, ARG_8_11, 6)
+    IfEventComparison(5, ARG_4_7, 6, 3, ARG_12_15, 6)
+    IfEventComparison(5, ARG_4_7, 6, 0, ARG_16_19, 6)
+    IfConditionTrue(-2, input_condition=3)
+    IfConditionTrue(-2, input_condition=4)
+    IfConditionTrue(-2, input_condition=5)
+    SkipLinesIfConditionTrue(3, 2)
+    SkipLinesIfConditionTrue(11, -1)
+    SkipLinesIfConditionTrue(6, -2)
+    SkipLines(5)
+    EnableFlag(11215393)
+    DisplayBanner(TextBannerType.arena_victory)
+    Wait(2.0)
+    DisplayBattlefieldMessage(150050, display_location_index=1)
+    SkipLines(29)
+    DisplayBanner(TextBannerType.arena_draw)
+    Wait(2.0)
+    DisplayBattlefieldMessage(150055, display_location_index=1)
+    SkipLines(18)
+    ClearEventValue(7000, bit_count=10)
+    ClearEventValue(7050, bit_count=10)
+    ClearEventValue(7100, bit_count=10)
+    ClearEventValue(7150, bit_count=10)
+    ClearEventValue(7200, bit_count=10)
+    ClearEventValue(7250, bit_count=10)
+    ClearEventValue(7300, bit_count=10)
+    ClearEventValue(7350, bit_count=10)
+    ClearEventValue(7400, bit_count=10)
+    ClearEventValue(7450, bit_count=10)
+    ClearEventValue(7500, bit_count=10)
+    ClearEventValue(7550, bit_count=10)
+    ClearEventValue(7600, bit_count=10)
+    ClearEventValue(7650, bit_count=10)
+    ClearEventValue(7700, bit_count=10)
+    DisplayBanner(TextBannerType.arena_loss)
+    Wait(2.0)
+    DisplayBattlefieldMessage(150060, display_location_index=1)
+    SkipLinesIfFlagOff(2, 11215392)
+    ArenaRankingRequest2v2()
+    SkipLines(4)
+    SkipLinesIfFlagOff(2, 11215395)
+    ArenaRankingRequestFFA()
+    SkipLines(1)
+    ArenaRankingRequest1v1()
+    Wait(8.0)
+    DisableInvincibility(10000)
+    CancelSpecialEffect(10000, 90000)
+    ArenaExitRequest()
+
+
+@NeverRestart
+def Event11210705():
+    """ 11210705: Event 11210705 """
+    DisableNetworkSync()
+    IfFlagOff(1, 11215392)
+    IfFlagOff(1, 11215395)
+    IfFlagOn(1, 11215393)
+    IfConditionTrue(0, input_condition=1)
+    SkipLinesIfFlagOff(2, 11215380)
+    IncrementEventValue(7000, bit_count=10, max_value=1000)
+    IfEventComparison(2, 7000, 10, 2, 6000, 10)
+    SkipLinesIfFlagOff(2, 11215381)
+    IncrementEventValue(7050, bit_count=10, max_value=1000)
+    IfEventComparison(2, 7050, 10, 2, 6050, 10)
+    SkipLinesIfFlagOff(2, 11215382)
+    IncrementEventValue(7100, bit_count=10, max_value=1000)
+    IfEventComparison(2, 7100, 10, 2, 6100, 10)
+    SkipLinesIfFlagOff(2, 11215383)
+    IncrementEventValue(7150, bit_count=10, max_value=1000)
+    IfEventComparison(2, 7150, 10, 2, 6150, 10)
+    IncrementEventValue(7200, bit_count=10, max_value=1000)
+    SkipLinesIfConditionTrue(3, 2)
+    ArenaRankingRequest1v1()
+    DisableFlag(11215393)
+    Restart()
+    SkipLinesIfFlagOff(1, 11215380)
+    IncrementEventValue(6000, bit_count=10, max_value=1000)
+    SkipLinesIfFlagOff(1, 11215381)
+    IncrementEventValue(6050, bit_count=10, max_value=1000)
+    SkipLinesIfFlagOff(1, 11215382)
+    IncrementEventValue(6100, bit_count=10, max_value=1000)
+    SkipLinesIfFlagOff(1, 11215383)
+    IncrementEventValue(6150, bit_count=10, max_value=1000)
+    IfEventComparison(3, 7200, 10, 2, 6200, 10)
+    SkipLinesIfConditionFalse(1, 3)
+    IncrementEventValue(6200, bit_count=10, max_value=1000)
+    ArenaRankingRequest1v1()
+    DisableFlag(11215393)
+    Restart()
+
+
+@NeverRestart
+def Event11210706():
+    """ 11210706: Event 11210706 """
+    DisableNetworkSync()
+    IfFlagOn(1, 11215392)
+    IfFlagOff(1, 11215395)
+    IfFlagOn(1, 11215393)
+    IfConditionTrue(0, input_condition=1)
+    SkipLinesIfFlagOff(2, 11215380)
+    IncrementEventValue(7250, bit_count=10, max_value=1000)
+    IfEventComparison(2, 7250, 10, 2, 6250, 10)
+    SkipLinesIfFlagOff(2, 11215381)
+    IncrementEventValue(7300, bit_count=10, max_value=1000)
+    IfEventComparison(2, 7300, 10, 2, 6300, 10)
+    SkipLinesIfFlagOff(2, 11215382)
+    IncrementEventValue(7350, bit_count=10, max_value=1000)
+    IfEventComparison(2, 7350, 10, 2, 6350, 10)
+    SkipLinesIfFlagOff(2, 11215383)
+    IncrementEventValue(7400, bit_count=10, max_value=1000)
+    IfEventComparison(2, 7400, 10, 2, 6400, 10)
+    IncrementEventValue(7450, bit_count=10, max_value=1000)
+    SkipLinesIfConditionTrue(3, 2)
+    ArenaRankingRequest2v2()
+    DisableFlag(11215393)
+    Restart()
+    SkipLinesIfFlagOff(1, 11215380)
+    IncrementEventValue(6250, bit_count=10, max_value=1000)
+    SkipLinesIfFlagOff(1, 11215381)
+    IncrementEventValue(6300, bit_count=10, max_value=1000)
+    SkipLinesIfFlagOff(1, 11215382)
+    IncrementEventValue(6350, bit_count=10, max_value=1000)
+    SkipLinesIfFlagOff(1, 11215383)
+    IncrementEventValue(6400, bit_count=10, max_value=1000)
+    IfEventComparison(3, 7450, 10, 2, 6450, 10)
+    SkipLinesIfConditionFalse(1, 3)
+    IncrementEventValue(6450, bit_count=10, max_value=1000)
+    ArenaRankingRequest2v2()
+    DisableFlag(11215393)
+    Restart()
+
+
+@NeverRestart
+def Event11210707():
+    """ 11210707: Event 11210707 """
+    DisableNetworkSync()
+    IfFlagOff(1, 11215392)
+    IfFlagOn(1, 11215395)
+    IfFlagOn(1, 11215393)
+    IfConditionTrue(0, input_condition=1)
+    SkipLinesIfFlagOff(2, 11215380)
+    IncrementEventValue(7500, bit_count=10, max_value=1000)
+    IfEventComparison(2, 7500, 10, 2, 6500, 10)
+    SkipLinesIfFlagOff(2, 11215381)
+    IncrementEventValue(7550, bit_count=10, max_value=1000)
+    IfEventComparison(2, 7550, 10, 2, 6550, 10)
+    SkipLinesIfFlagOff(2, 11215382)
+    IncrementEventValue(7600, bit_count=10, max_value=1000)
+    IfEventComparison(2, 7600, 10, 2, 6600, 10)
+    SkipLinesIfFlagOff(2, 11215383)
+    IncrementEventValue(7650, bit_count=10, max_value=1000)
+    IfEventComparison(2, 7650, 10, 2, 6650, 10)
+    IncrementEventValue(7700, bit_count=10, max_value=1000)
+    SkipLinesIfConditionTrue(3, 2)
+    ArenaRankingRequestFFA()
+    DisableFlag(11215393)
+    Restart()
+    SkipLinesIfFlagOff(1, 11215380)
+    IncrementEventValue(6500, bit_count=10, max_value=1000)
+    SkipLinesIfFlagOff(1, 11215381)
+    IncrementEventValue(6550, bit_count=10, max_value=1000)
+    SkipLinesIfFlagOff(1, 11215382)
+    IncrementEventValue(6600, bit_count=10, max_value=1000)
+    SkipLinesIfFlagOff(1, 11215383)
+    IncrementEventValue(6650, bit_count=10, max_value=1000)
+    IfEventComparison(3, 7700, 10, 2, 6700, 10)
+    SkipLinesIfConditionFalse(1, 3)
+    IncrementEventValue(6700, bit_count=10, max_value=1000)
+    ArenaRankingRequestFFA()
+    DisableFlag(11215393)
+    Restart()
+
+
+@NeverRestart
+def Event11210838():
+    """ 11210838: Event 11210838 """
+    DisableNetworkSync()
+    IfPlayerInsideRegion(-1, 1212700)
+    IfPlayerInsideRegion(-1, 1212701)
+    IfPlayerInsideRegion(-1, 1212702)
+    IfPlayerInsideRegion(-1, 1212713)
+    IfPlayerInsideRegion(-1, 1212714)
+    IfPlayerInsideRegion(-1, 1212715)
+    IfConditionTrue(0, input_condition=-1)
+    EqualRecovery()
+
+
+@NeverRestart
+def Event11210839():
+    """ 11210839: Event 11210839 """
+    DisableNetworkSync()
+    DisableFlagRange(8140, 8145)
+    IfMultiplayer(1)
+    IfPlayerInsideRegion(1, 1212700)
+    IfMultiplayer(2)
+    IfPlayerInsideRegion(2, 1212701)
+    IfMultiplayer(3)
+    IfPlayerInsideRegion(3, 1212702)
+    IfMultiplayer(4)
+    IfPlayerInsideRegion(4, 1212713)
+    IfMultiplayer(5)
+    IfPlayerInsideRegion(5, 1212714)
+    IfMultiplayer(6)
+    IfPlayerInsideRegion(6, 1212715)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(-1, input_condition=3)
+    IfConditionTrue(-1, input_condition=4)
+    IfConditionTrue(-1, input_condition=5)
+    IfConditionTrue(-1, input_condition=6)
+    IfConditionTrue(0, input_condition=-1)
+    SkipLinesIfFinishedConditionFalse(1, 1)
+    EnableFlag(8145)
+    SkipLinesIfFinishedConditionFalse(1, 2)
+    EnableFlag(8143)
+    SkipLinesIfFinishedConditionFalse(1, 3)
+    EnableFlag(8141)
+    SkipLinesIfFinishedConditionFalse(1, 4)
+    EnableFlag(8144)
+    SkipLinesIfFinishedConditionFalse(1, 5)
+    EnableFlag(8142)
+    SkipLinesIfFinishedConditionFalse(1, 6)
+    EnableFlag(8140)
+
+
+@NeverRestart
+def Event11210877():
+    """ 11210877: Event 11210877 """
+    DisableNetworkSync()
+    IfFlagOn(7, 11215390)
+    IfFlagRangeAllOff(7, 11215380, 11215383)
+    IfConditionTrue(0, input_condition=7)
+    IfPlayerSoulLevelLessThanOrEqual(1, 50)
+    SkipLinesIfConditionFalse(2, 1)
+    EnableFlag(11215380)
+    Restart()
+    IfPlayerSoulLevelComparison(2, 2, 50)
+    IfPlayerSoulLevelLessThanOrEqual(2, 100)
+    SkipLinesIfConditionFalse(2, 2)
+    EnableFlag(11215381)
+    Restart()
+    IfPlayerSoulLevelComparison(3, 2, 100)
+    IfPlayerSoulLevelLessThanOrEqual(3, 200)
+    SkipLinesIfConditionFalse(2, 3)
+    EnableFlag(11215382)
+    Restart()
+    EnableFlag(11215383)
+    Restart()
+
+
+@NeverRestart
+def Event11210880(ARG_0_3: int, ARG_4_7: int):
+    """ 11210880: Event 11210880 """
+    DisableNetworkSync()
+    EndIfClient()
+    IfHost(1)
+    IfMultiplayer(1)
+    IfFlagOff(1, 11215341)
+    IfFlagOff(1, 11215390)
+    IfPlayerInsideRegion(1, ARG_0_3)
+    IfPlayerOutsideRegion(1, ARG_4_7)
+    IfConditionTrue(0, input_condition=1)
+    PlayCutscene(cutscene_id=120130, skippable=False, fade_out=False, warp_to_region=ARG_4_7, warp_to_map=OOLACILE)
+    WaitFrames(1)
+    Restart()
+
+
+@NeverRestart
+def Event11210890(ARG_0_3: int, ARG_4_7: int):
+    """ 11210890: Event 11210890 """
+    DisableNetworkSync()
+    IfFlagOn(1, 11215390)
+    IfSinglePlayer(1)
+    IfPlayerInsideRegion(1, ARG_0_3)
+    IfConditionTrue(0, input_condition=1)
+    Wait(3.0)
+    WarpToMap(OOLACILE, player_entity_id=ARG_4_7)
+    Wait(3.0)
+    Restart()
+
+
+@NeverRestart
+def Event11210701(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int, ARG_16_19: int):
+    """ 11210701: Event 11210701 """
+    IfFlagOff(-1, 11215396)
+    IfFlagOn(-1, 11215397)
+    IfConditionTrue(1, input_condition=-1)
+    IfFlagOn(1, 11215390)
+    IfFlagOn(1, ARG_0_3)
+    IfFlagOff(2, 11215395)
+    IfEventComparison(2, ARG_4_7, 6, 3, ARG_8_11, 6)
+    IfFlagOn(3, 11215395)
+    IfEventComparison(3, ARG_4_7, 6, 3, ARG_8_11, 6)
+    IfEventComparison(3, ARG_4_7, 6, 3, ARG_12_15, 6)
+    IfEventComparison(3, ARG_4_7, 6, 3, ARG_16_19, 6)
+    IfConditionTrue(-2, input_condition=2)
+    IfConditionTrue(-2, input_condition=3)
+    IfConditionTrue(1, input_condition=-2)
+    IfFlagOn(4, 11215342)
+    IfFlagOn(5, 11215343)
+    IfFlagOn(6, 11215344)
+    IfFlagOn(7, 11215345)
+    IfConditionTrue(0, input_condition=1)
+    SkipLinesIfFinishedConditionFalse(1, 4)
+    AddSpecialEffect(10000, 4615)
+    SkipLinesIfFinishedConditionFalse(1, 5)
+    AddSpecialEffect(10000, 4616)
+    SkipLinesIfFinishedConditionFalse(1, 6)
+    AddSpecialEffect(10000, 4617)
+    SkipLinesIfFinishedConditionFalse(1, 7)
+    AddSpecialEffect(10000, 4618)
+    SkipLinesIfFinishedConditionTrue(4, 4)
+    SkipLinesIfFinishedConditionTrue(3, 5)
+    SkipLinesIfFinishedConditionTrue(2, 6)
+    SkipLinesIfFinishedConditionTrue(1, 7)
+    AddSpecialEffect(10000, 4612)
+    Wait(5.0)
+    Restart()
+
+
+@NeverRestart
+def Event11210430(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int):
+    """ 11210430: Event 11210430 """
+    IfFlagOff(-1, 11215396)
+    IfFlagOn(-1, 11215397)
+    IfConditionTrue(1, input_condition=-1)
+    IfFlagOn(1, 11215390)
+    IfFlagOn(1, ARG_0_3)
+    IfFlagOff(2, 11215395)
+    IfEventComparison(2, ARG_4_7, 6, 0, ARG_8_11, 6)
+    IfConditionTrue(1, input_condition=2)
+    IfFlagOn(-3, 11215399)
+    IfFlagOn(-3, 11215397)
+    IfConditionTrue(1, input_condition=-3)
+    IfConditionTrue(0, input_condition=1)
+    AddSpecialEffect(10000, 4614)
+    Wait(5.0)
+    Restart()
+
+
+@NeverRestart
+def Event11210435(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int, ARG_16_19: int):
+    """ 11210435: Event 11210435 """
+    IfFlagOn(1, 11215390)
+    IfFlagOn(2, 11215390)
+    IfFlagOn(3, 11215390)
+    IfFlagOn(4, 11215390)
+    IfFlagOn(5, 11215390)
+    IfFlagOn(6, 11215390)
+    IfFlagOn(7, 11215390)
+    IfFlagOn(1, ARG_0_3)
+    IfFlagOn(2, ARG_0_3)
+    IfFlagOn(3, ARG_0_3)
+    IfFlagOn(4, ARG_0_3)
+    IfFlagOn(5, ARG_0_3)
+    IfFlagOn(6, ARG_0_3)
+    IfFlagOn(7, ARG_0_3)
+    IfFlagOn(1, 11215395)
+    IfFlagOn(2, 11215395)
+    IfFlagOn(3, 11215395)
+    IfFlagOn(4, 11215395)
+    IfFlagOn(5, 11215395)
+    IfFlagOn(6, 11215395)
+    IfFlagOn(7, 11215395)
+    IfFlagOn(-1, 11215399)
+    IfFlagOn(-1, 11215397)
+    IfConditionTrue(1, input_condition=-1)
+    IfConditionTrue(2, input_condition=-1)
+    IfConditionTrue(3, input_condition=-1)
+    IfConditionTrue(4, input_condition=-1)
+    IfConditionTrue(5, input_condition=-1)
+    IfConditionTrue(6, input_condition=-1)
+    IfConditionTrue(7, input_condition=-1)
+    IfFlagOff(-2, 11215396)
+    IfFlagOn(-2, 11215397)
+    IfConditionTrue(1, input_condition=-2)
+    IfConditionTrue(2, input_condition=-2)
+    IfConditionTrue(3, input_condition=-2)
+    IfConditionTrue(4, input_condition=-2)
+    IfConditionTrue(5, input_condition=-2)
+    IfConditionTrue(6, input_condition=-2)
+    IfConditionTrue(7, input_condition=-2)
+    IfEventComparison(1, ARG_4_7, 6, 0, ARG_8_11, 6)
+    IfEventComparison(1, ARG_4_7, 6, 0, ARG_12_15, 6)
+    IfEventComparison(1, ARG_4_7, 6, 0, ARG_16_19, 6)
+    IfEventComparison(2, ARG_4_7, 6, 0, ARG_8_11, 6)
+    IfEventComparison(2, ARG_4_7, 6, 3, ARG_12_15, 6)
+    IfEventComparison(2, ARG_4_7, 6, 3, ARG_16_19, 6)
+    IfEventComparison(3, ARG_4_7, 6, 3, ARG_8_11, 6)
+    IfEventComparison(3, ARG_4_7, 6, 0, ARG_12_15, 6)
+    IfEventComparison(3, ARG_4_7, 6, 3, ARG_16_19, 6)
+    IfEventComparison(4, ARG_4_7, 6, 3, ARG_8_11, 6)
+    IfEventComparison(4, ARG_4_7, 6, 3, ARG_12_15, 6)
+    IfEventComparison(4, ARG_4_7, 6, 0, ARG_16_19, 6)
+    IfEventComparison(5, ARG_4_7, 6, 0, ARG_8_11, 6)
+    IfEventComparison(5, ARG_4_7, 6, 0, ARG_12_15, 6)
+    IfEventComparison(5, ARG_4_7, 6, 3, ARG_16_19, 6)
+    IfEventComparison(6, ARG_4_7, 6, 3, ARG_8_11, 6)
+    IfEventComparison(6, ARG_4_7, 6, 0, ARG_12_15, 6)
+    IfEventComparison(6, ARG_4_7, 6, 0, ARG_16_19, 6)
+    IfEventComparison(7, ARG_4_7, 6, 0, ARG_8_11, 6)
+    IfEventComparison(7, ARG_4_7, 6, 3, ARG_12_15, 6)
+    IfEventComparison(7, ARG_4_7, 6, 0, ARG_16_19, 6)
+    IfConditionTrue(-7, input_condition=1)
+    IfConditionTrue(-7, input_condition=2)
+    IfConditionTrue(-7, input_condition=3)
+    IfConditionTrue(-7, input_condition=4)
+    IfConditionTrue(-7, input_condition=4)
+    IfConditionTrue(-7, input_condition=5)
+    IfConditionTrue(-7, input_condition=6)
+    IfConditionTrue(-7, input_condition=7)
+    IfConditionTrue(0, input_condition=-7)
+    AddSpecialEffect(10000, 4614)
+    Wait(5.0)
+    Restart()
+
+
+@NeverRestart
+def Event11210434():
+    """ 11210434: Event 11210434 """
+    EnableFlag(11215399)
+    End()
+    IfFlagOn(1, 11215390)
+    IfFlagOff(1, 11215392)
+    IfFlagOff(1, 11215395)
+    IfFlagRangeAnyOn(-2, 11215300, 11215305)
+    IfFlagRangeAnyOn(-2, 11215312, 11215317)
+    IfConditionTrue(1, input_condition=-2)
+    IfFlagOn(2, 11215390)
+    IfFlagOn(-1, 11215392)
+    IfFlagOn(-1, 11215395)
+    IfConditionTrue(2, input_condition=-1)
+    IfFlagRangeAnyOn(-3, 11215300, 11215305)
+    IfFlagRangeAnyOn(-3, 11215306, 11215311)
+    IfFlagRangeAnyOn(-3, 11215312, 11215317)
+    IfFlagRangeAnyOn(-3, 11215318, 11215323)
+    IfConditionTrue(2, input_condition=-3)
+    IfConditionTrue(-7, input_condition=1)
+    IfConditionTrue(-7, input_condition=2)
+    IfConditionTrue(0, input_condition=-7)
+    EnableFlag(11215399)
+
+
+@NeverRestart
+def Event11210845():
+    """ 11210845: Event 11210845 """
+    IfFlagOn(1, 11215350)
+    IfFlagOn(1, 11215390)
+    IfConditionTrue(0, input_condition=1)
+    ArenaSetNametag1()
+
+
+@NeverRestart
+def Event11210846():
+    """ 11210846: Event 11210846 """
+    IfFlagOn(1, 11215351)
+    IfFlagOn(1, 11215390)
+    IfConditionTrue(0, input_condition=1)
+    ArenaSetNametag2()
+
+
+@NeverRestart
+def Event11210847():
+    """ 11210847: Event 11210847 """
+    IfFlagOn(1, 11215352)
+    IfFlagOn(1, 11215390)
+    IfConditionTrue(0, input_condition=1)
+    ArenaSetNametag3()
+
+
+@NeverRestart
+def Event11210848():
+    """ 11210848: Event 11210848 """
+    IfFlagOn(1, 11215353)
+    IfFlagOn(1, 11215390)
+    IfConditionTrue(0, input_condition=1)
+    ArenaSetNametag4()
+
+
+@NeverRestart
+def Event11210849():
+    """ 11210849: Event 11210849 """
+    DisableNetworkSync()
+    IfPlayerHasSpecialEffect(0, 17)
+    EnableFlag(8146)
+    SkipLinesIfClient(2)
+    DisplayArenaDissolutionMessage(150030)
+    SkipLines(1)
+    DisplayArenaDissolutionMessage(150031)
+    Wait(1.0)
+    SkipLinesIfFlagOn(4, 11215390)
+    ArenaExitRequest()
+    Wait(3.0)
+    WarpToMap(OOLACILE, player_entity_id=1218146)
+    Restart()
+    ArenaExitRequest()
+    Wait(3.0)
+    Restart()
+
+
+@NeverRestart
+def Event11210837():
+    """ 11210837: Event 11210837 """
+    IfHost(1)
+    IfMultiplayer(1)
+    IfFlagOn(1, 8146)
+    IfClient(2)
+    IfMultiplayer(2)
+    IfFlagOn(2, 8146)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(0, input_condition=-1)
+    SkipLinesIfFlagOff(1, 8146)
+    IfFlagOff(0, 8146)
+    SkipLinesIfFinishedConditionTrue(2, 2)
+    DisplayArenaDissolutionMessage(150040)
+    Restart()
+    DisplayArenaDissolutionMessage(20000437)
+    Restart()
+
+
+@NeverRestart
+def Event11210401():
+    """ 11210401: Event 11210401 """
+    DisableNetworkSync()
+    IfMultiplayer(1)
+    IfTrueFlagCountGreaterThanOrEqual(1, 2, 11215360, 11215363)
+    IfPlayerHasSpecialEffect(1, 4613)
+    IfFlagOff(1, 11215340)
+    IfConditionTrue(0, input_condition=1)
+    Wait(15.0)
+    RestartIfFlagOn(11215340)
+    RestartIfSinglePlayer()
+    DisplayBattlefieldMessage(150001, display_location_index=1)
+    Restart()
+
+
+@NeverRestart
+def Event11210402():
+    """ 11210402: Event 11210402 """
+    DisableNetworkSync()
+    IfPlayerInsideRegion(-1, 1212700)
+    IfPlayerInsideRegion(-1, 1212701)
+    IfPlayerInsideRegion(-1, 1212702)
+    IfPlayerInsideRegion(-1, 1212713)
+    IfPlayerInsideRegion(-1, 1212714)
+    IfPlayerInsideRegion(-1, 1212715)
+    IfConditionTrue(1, input_condition=-1)
+    IfPlayerHasSpecialEffect(-2, 2320)
+    IfPlayerHasSpecialEffect(-2, 2330)
+    IfConditionTrue(1, input_condition=-2)
+    IfConditionTrue(0, input_condition=1)
+    CancelSpecialEffect(10000, 2320)
+    CancelSpecialEffect(10000, 2330)
+    Restart()
+
+
+@NeverRestart
+def Event11210403():
+    """ 11210403: Event 11210403 """
+    DisableNetworkSync()
+    IfSinglePlayer(1)
+    IfFlagOn(1, 765)
+    IfPlayerInsideRegion(-1, 1212703)
+    IfPlayerInsideRegion(-1, 1212704)
+    IfPlayerInsideRegion(-1, 1212705)
+    IfPlayerInsideRegion(-1, 1212706)
+    IfPlayerInsideRegion(-1, 1212707)
+    IfPlayerInsideRegion(-1, 1212708)
+    IfPlayerInsideRegion(-1, 1212709)
+    IfPlayerInsideRegion(-1, 1212710)
+    IfPlayerInsideRegion(-1, 1212711)
+    IfPlayerInsideRegion(-1, 1212712)
+    IfPlayerInsideRegion(-1, 1212716)
+    IfPlayerInsideRegion(-1, 1212717)
+    IfPlayerInsideRegion(-1, 1212718)
+    IfPlayerInsideRegion(-1, 1212719)
+    IfPlayerInsideRegion(-1, 1212720)
+    IfPlayerInsideRegion(-1, 1212721)
+    IfPlayerInsideRegion(-1, 1212722)
+    IfPlayerInsideRegion(-1, 1212723)
+    IfPlayerInsideRegion(-1, 1212724)
+    IfPlayerInsideRegion(-1, 1212725)
+    IfConditionTrue(1, input_condition=-1)
+    IfConditionTrue(0, input_condition=1)
+    DisplayDialog(150400, anchor_entity=-1, display_distance=5.0, button_type=ButtonType.ok_cancel, number_buttons=NumberButtons.one_button)
+    Wait(10.0)
+    Restart()
+
+
+@NeverRestart
+def Event11210404(ARG_0_3: int):
+    """ 11210404: Event 11210404 """
+    DisableNetworkSync()
+    IfFlagOn(0, 11215340)
+    IfEventValueComparison(1, ARG_0_3, bit_count=10, comparison_type_enum=3, value=10)
+    IfEventValueComparison(2, ARG_0_3, bit_count=10, comparison_type_enum=4, value=10)
+    IfEventValueComparison(2, ARG_0_3, bit_count=10, comparison_type_enum=3, value=30)
+    IfEventValueComparison(3, ARG_0_3, bit_count=10, comparison_type_enum=4, value=30)
+    IfEventValueComparison(3, ARG_0_3, bit_count=10, comparison_type_enum=3, value=50)
+    IfEventValueComparison(4, ARG_0_3, bit_count=10, comparison_type_enum=4, value=50)
+    IfEventValueComparison(4, ARG_0_3, bit_count=10, comparison_type_enum=3, value=100)
+    IfEventValueComparison(5, ARG_0_3, bit_count=10, comparison_type_enum=4, value=100)
+    SkipLinesIfConditionFalse(1, 2)
+    EnableFlag(11215342)
+    SkipLinesIfConditionFalse(1, 3)
+    EnableFlag(11215343)
+    SkipLinesIfConditionFalse(1, 4)
+    EnableFlag(11215344)
+    SkipLinesIfConditionFalse(1, 5)
+    EnableFlag(11215345)
+
+
+@NeverRestart
+def Event11210407():
+    """ 11210407: Event 11210407 """
+    DisableNetworkSync()
+    SkipLinesIfFlagOff(2, 11210709)
+    DisableFlag(11210709)
+    End()
+    EndIfMultiplayer()
+    IfPlayerInsideRegion(-1, 1212700)
+    IfPlayerInsideRegion(-1, 1212713)
+    IfPlayerInsideRegion(-1, 1212701)
+    IfPlayerInsideRegion(-1, 1212714)
+    IfPlayerInsideRegion(-1, 1212702)
+    IfPlayerInsideRegion(-1, 1212715)
+    EndIfConditionFalse(-1)
+    Wait(2.0)
+    RunEvent(11216300)
+    RunEvent(11216301)
+    RunEvent(11216200, slot=0, args=(1, 60000001), arg_types='Ii')
+    RunEvent(11216200, slot=1, args=(2, 60000002), arg_types='Ii')
+    RunEvent(11216200, slot=2, args=(3, 60000003), arg_types='Ii')
+    RunEvent(11216200, slot=3, args=(4, 60000004), arg_types='Ii')
+    RunEvent(11216200, slot=4, args=(5, 60000005), arg_types='Ii')
+    RunEvent(11216200, slot=5, args=(6, 60000006), arg_types='Ii')
+    RunEvent(11216200, slot=6, args=(7, 60000007), arg_types='Ii')
+    RunEvent(11216200, slot=7, args=(8, 60000008), arg_types='Ii')
+    RunEvent(11216200, slot=8, args=(9, 60000009), arg_types='Ii')
+    RunEvent(11216200, slot=9, args=(10, 60000010), arg_types='Ii')
+    RunEvent(11216200, slot=10, args=(11, 60000011), arg_types='Ii')
+    RunEvent(11216200, slot=11, args=(12, 60000012), arg_types='Ii')
+    RunEvent(11216200, slot=12, args=(13, 60000013), arg_types='Ii')
+    RunEvent(11216200, slot=13, args=(14, 60000014), arg_types='Ii')
+    RunEvent(11216200, slot=14, args=(15, 60000015), arg_types='Ii')
+    RunEvent(11216200, slot=15, args=(16, 60000016), arg_types='Ii')
+    RunEvent(11216200, slot=16, args=(17, 60000017), arg_types='Ii')
+    RunEvent(11216200, slot=17, args=(18, 60000018), arg_types='Ii')
+    RunEvent(11216200, slot=18, args=(19, 60000019), arg_types='Ii')
+    RunEvent(11216200, slot=19, args=(20, 60000020), arg_types='Ii')
+    RunEvent(11216200, slot=20, args=(21, 60000021), arg_types='Ii')
+    RunEvent(11216200, slot=21, args=(22, 60000022), arg_types='Ii')
+    RunEvent(11216200, slot=22, args=(23, 60000023), arg_types='Ii')
+    RunEvent(11216200, slot=23, args=(24, 60000024), arg_types='Ii')
+    RunEvent(11216200, slot=24, args=(25, 60000025), arg_types='Ii')
+    RunEvent(11216200, slot=25, args=(26, 60000026), arg_types='Ii')
+    RunEvent(11216200, slot=26, args=(27, 60000027), arg_types='Ii')
+    RunEvent(11216200, slot=27, args=(28, 60000028), arg_types='Ii')
+    RunEvent(11216200, slot=28, args=(29, 60000029), arg_types='Ii')
+    RunEvent(11216200, slot=29, args=(30, 60000030), arg_types='Ii')
+    RunEvent(11216200, slot=30, args=(31, 60000031), arg_types='Ii')
+    RunEvent(11216200, slot=31, args=(32, 60000032), arg_types='Ii')
+    RunEvent(11216200, slot=32, args=(33, 60000033), arg_types='Ii')
+    RunEvent(11216200, slot=33, args=(34, 60000034), arg_types='Ii')
+    RunEvent(11216200, slot=34, args=(35, 60000035), arg_types='Ii')
+    RunEvent(11216200, slot=35, args=(36, 60000036), arg_types='Ii')
+    RunEvent(11216200, slot=36, args=(37, 60000037), arg_types='Ii')
+    RunEvent(11216200, slot=37, args=(38, 60000038), arg_types='Ii')
+    RunEvent(11216200, slot=38, args=(39, 60000039), arg_types='Ii')
+    RunEvent(11216200, slot=39, args=(40, 60000040), arg_types='Ii')
+    RunEvent(11216200, slot=40, args=(41, 60000041), arg_types='Ii')
+    RunEvent(11216200, slot=41, args=(42, 60000042), arg_types='Ii')
+    RunEvent(11216200, slot=42, args=(43, 60000043), arg_types='Ii')
+    RunEvent(11216200, slot=43, args=(44, 60000044), arg_types='Ii')
+    RunEvent(11216200, slot=44, args=(45, 60000045), arg_types='Ii')
+    RunEvent(11216200, slot=45, args=(46, 60000046), arg_types='Ii')
+    RunEvent(11216200, slot=46, args=(47, 60000047), arg_types='Ii')
+    RunEvent(11216200, slot=47, args=(48, 60000048), arg_types='Ii')
+    RunEvent(11216200, slot=48, args=(49, 60000049), arg_types='Ii')
+    RunEvent(11216200, slot=49, args=(50, 60000050), arg_types='Ii')
+    RunEvent(11216200, slot=50, args=(51, 60000051), arg_types='Ii')
+    RunEvent(11216200, slot=51, args=(52, 60000052), arg_types='Ii')
+    RunEvent(11216200, slot=52, args=(53, 60000053), arg_types='Ii')
+    RunEvent(11216200, slot=53, args=(54, 60000054), arg_types='Ii')
+    RunEvent(11216200, slot=54, args=(55, 60000055), arg_types='Ii')
+    RunEvent(11216200, slot=55, args=(56, 60000056), arg_types='Ii')
+    RunEvent(11216200, slot=56, args=(57, 60000057), arg_types='Ii')
+    RunEvent(11216200, slot=57, args=(58, 60000058), arg_types='Ii')
+    RunEvent(11216200, slot=58, args=(59, 60000059), arg_types='Ii')
+    RunEvent(11216200, slot=59, args=(60, 60000060), arg_types='Ii')
+    RunEvent(11216200, slot=60, args=(61, 60000061), arg_types='Ii')
+    RunEvent(11216200, slot=61, args=(62, 60000062), arg_types='Ii')
+    RunEvent(11216200, slot=62, args=(63, 60000063), arg_types='Ii')
+    RunEvent(11216200, slot=63, args=(64, 60000064), arg_types='Ii')
+    RunEvent(11216200, slot=64, args=(65, 60000065), arg_types='Ii')
+    RunEvent(11216200, slot=65, args=(66, 60000066), arg_types='Ii')
+    RunEvent(11216200, slot=66, args=(67, 60000067), arg_types='Ii')
+    RunEvent(11216200, slot=67, args=(68, 60000068), arg_types='Ii')
+    RunEvent(11216200, slot=68, args=(69, 60000069), arg_types='Ii')
+    RunEvent(11216200, slot=69, args=(70, 60000070), arg_types='Ii')
+    RunEvent(11216200, slot=70, args=(71, 60000071), arg_types='Ii')
+    RunEvent(11216200, slot=71, args=(72, 60000072), arg_types='Ii')
+    RunEvent(11216200, slot=72, args=(73, 60000073), arg_types='Ii')
+    RunEvent(11216200, slot=73, args=(74, 60000074), arg_types='Ii')
+    RunEvent(11216200, slot=74, args=(75, 60000075), arg_types='Ii')
+    RunEvent(11216200, slot=75, args=(76, 60000076), arg_types='Ii')
+    RunEvent(11216200, slot=76, args=(77, 60000077), arg_types='Ii')
+    RunEvent(11216200, slot=77, args=(78, 60000078), arg_types='Ii')
+    RunEvent(11216200, slot=78, args=(79, 60000079), arg_types='Ii')
+    RunEvent(11216200, slot=79, args=(80, 60000080), arg_types='Ii')
+    RunEvent(11216200, slot=80, args=(81, 60000081), arg_types='Ii')
+    RunEvent(11216200, slot=81, args=(82, 60000082), arg_types='Ii')
+    RunEvent(11216200, slot=82, args=(83, 60000083), arg_types='Ii')
+    RunEvent(11216200, slot=83, args=(84, 60000084), arg_types='Ii')
+    RunEvent(11216200, slot=84, args=(85, 60000085), arg_types='Ii')
+    RunEvent(11216200, slot=85, args=(86, 60000086), arg_types='Ii')
+    RunEvent(11216200, slot=86, args=(87, 60000087), arg_types='Ii')
+    RunEvent(11216200, slot=87, args=(88, 60000088), arg_types='Ii')
+    RunEvent(11216200, slot=88, args=(89, 60000089), arg_types='Ii')
+    RunEvent(11216200, slot=89, args=(90, 60000090), arg_types='Ii')
+    RunEvent(11216200, slot=90, args=(91, 60000091), arg_types='Ii')
+    RunEvent(11216200, slot=91, args=(92, 60000092), arg_types='Ii')
+    RunEvent(11216200, slot=92, args=(93, 60000093), arg_types='Ii')
+    RunEvent(11216200, slot=93, args=(94, 60000094), arg_types='Ii')
+    RunEvent(11216200, slot=94, args=(95, 60000095), arg_types='Ii')
+    RunEvent(11216200, slot=95, args=(96, 60000096), arg_types='Ii')
+    RunEvent(11216200, slot=96, args=(97, 60000097), arg_types='Ii')
+    RunEvent(11216200, slot=97, args=(98, 60000098), arg_types='Ii')
+    RunEvent(11216200, slot=98, args=(99, 60000099), arg_types='Ii')
+    RunEvent(11216200, slot=99, args=(100, 60000100), arg_types='Ii')
+
+
+@NeverRestart
+def Event11216200(ARG_0_3: uint, ARG_4_7: int):
+    """ 11216200: Event 11216200 """
+    DisableNetworkSync()
+    IfEventValueComparison(-1, 7200, bit_count=10, comparison_type_enum=0, value=ARG_0_3)
+    IfEventValueComparison(-1, 7450, bit_count=10, comparison_type_enum=0, value=ARG_0_3)
+    IfEventValueComparison(-1, 7700, bit_count=10, comparison_type_enum=0, value=ARG_0_3)
+    EndIfConditionFalse(-1)
+    DisplayStatus(ARG_4_7, pad_enabled=True)
+
+
+@NeverRestart
+def Event11216300():
+    """ 11216300: Event 11216300 """
+    DisableNetworkSync()
+    IfEventValueEqual(1, 7200, bit_count=10, value=0)
+    IfEventValueEqual(1, 7450, bit_count=10, value=0)
+    IfEventValueEqual(1, 7700, bit_count=10, value=0)
+    EndIfConditionFalse(1)
+    DisplayStatus(60000000, pad_enabled=True)
+
+
+@NeverRestart
+def Event11216301():
+    """ 11216301: Event 11216301 """
+    DisableNetworkSync()
+    IfEventValueGreaterThan(-1, 7200, bit_count=10, value=100)
+    IfEventValueGreaterThan(-1, 7450, bit_count=10, value=100)
+    IfEventValueGreaterThan(-1, 7700, bit_count=10, value=100)
+    EndIfConditionFalse(-1)
+    DisplayStatus(59999999, pad_enabled=True)
+
+
+@NeverRestart
+def Event11210439():
+    """ 11210439: Event 11210439 """
+    EndIfClient()
+    IfPlayerInsideRegion(-1, 1212700)
+    IfPlayerInsideRegion(-1, 1212701)
+    IfPlayerInsideRegion(-1, 1212702)
+    IfPlayerInsideRegion(-1, 1212713)
+    IfPlayerInsideRegion(-1, 1212714)
+    IfPlayerInsideRegion(-1, 1212715)
+    EndIfConditionFalse(-1)
+    SetTeamType(10000, TeamType.human)
+
+
+@NeverRestart
+def Event7999():
+    """ 7999: Event 7999 """
+    DisableNetworkSync()
+    IfFlagOn(1, 905)
+    IfFlagOn(2, 906)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(0, input_condition=-1)
+    SkipLinesIfFlagOn(3, 906)
+    DisableFlag(905)
+    AddSpecialEffect(10000, 4611)
+    Restart()
+    DisableFlag(906)
+    AddSpecialEffect(10000, 4612)
+    Restart()
+
+
+@NeverRestart
+def Event7998():
+    """ 7998: Event 7998 """
+    IfFlagOn(1, 5100)
+    IfFlagOn(2, 5101)
+    IfFlagOn(3, 5102)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(-1, input_condition=3)
+    IfConditionTrue(0, input_condition=-1)
+    DisableFlagRange(5100, 5102)
+    SkipLinesIfFinishedConditionFalse(1, 1)
+    IncrementEventValue(7200, bit_count=10, max_value=1000)
+    SkipLinesIfFinishedConditionFalse(1, 2)
+    IncrementEventValue(7450, bit_count=10, max_value=1000)
+    SkipLinesIfFinishedConditionFalse(1, 3)
+    IncrementEventValue(7700, bit_count=10, max_value=1000)
+    Restart()
+
+
+@RestartOnRest
+def AllyStJude(ally: Character):
+    """ 11212000: Ally gets St Jude buff. """
+    await HasSpecialEffect(PLAYER, SPEFFECT.RingOfStJude)
+    AddSpecialEffect(ally, SPEFFECT.RingOfStJudeAlly)
+    await (not HasSpecialEffect(PLAYER, SPEFFECT.RingOfStJude))
+    CancelSpecialEffect(ally, SPEFFECT.RingOfStJudeAlly)
+    return RESTART
+
+
+@RestartOnRest
+def AllyMustRecover(ally: Character):
+    """ 11212010: Ally must recover health when they take enough damage. (Not for Sif.) """
+    await (IsAlive(CHR.FramptBoss) and HasSpecialEffect(ally, SPEFFECT.RingOfStJudeAlly))
+    EnableImmortality(ally)
+    IsWeak = Condition(HealthRatio(ally) <= 0.1, hold=True)
+    IsOffCliff = Condition(EntityInsideRegion(ally, 1212690), hold=True)
+    await (IsWeak or IsOffCliff)
+    if IsOffCliff:
+        WarpToEntity(ally, 1212691, destination_type=Category.region, short_warp=True)
+    AddSpecialEffect(ally, 3231)
+    DisableCharacter(ally)
+    Wait(30.0)
+    EnableCharacter(ally)
+    return RESTART
+
+
+@RestartOnRest
+def SifImmortality():
+    """ 11212020: Sif version of recovery. """
+    # Sif is just invincible. Checks for ring every ten seconds.
+    await HasSpecialEffect(CHR.Sif, SPEFFECT.RingOfStJudeAlly)
+    EnableInvincibility(CHR.Sif)
+    DisableHealthBar(CHR.Sif)
+    Wait(10.0)
+    return RESTART
+
+
+def SifOffCliff():
+    """ 11212021: Sif falls. """
+    await (HasSpecialEffect(CHR.Sif, SPEFFECT.RingOfStJudeAlly) and EntityInsideRegion(CHR.Sif, 1212690))
+    WarpToEntity(CHR.Sif, 1212691, destination_type=Category.region, short_warp=True)
+    DisableCharacter(CHR.Sif)
+    Wait(10.0)
+    EnableCharacter(CHR.Sif)
+    return RESTART

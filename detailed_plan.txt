@@ -1,0 +1,162 @@
+
+--- ST JUDE SOULS ---
+
+Need to convert this into an actionable TODO list.
+
+That means sorting out the few big questions I have left.
+
+-- ISSUE 1: How much combat?
+
+A few of the ideas I've had don't involve that much combat. This is fine, except for the fact that the player will need to level up somehow before the final battle, right?
+
+Well, I had the idea to just award a large chunk of souls upon successful completion of a level.
+
+Maybe there can be a handful of enemies scattered around each level, but none of them respawn, and they drop weapon reinforcement items.
+
+But then, what reinforcement paths are available? How much choice will I give the player? Where can they get alternate weapons? The level design involved in this is too much on top of what I already have planned.
+
+A simple option is to limit the player to their starting equipment. Enemies never drop new equipment, just upgrade materials. The only upgrade paths available are the standard path and raw path.
+
+I could have a skeleton puzzle that requires a divine weapon to beat, but that would mean 'sacrificing' your weapon.
+
+Perhaps the divine path is the only way to progress past +5? But then I'd need to stop the player from going Raw, which means ESD edits, which I'd like to avoid (even though it's probably not that difficult to disable). Maybe there's a simple flag I can disable to disable the Raw path at Andre.
+
+Either way will allow me to properly balance the final battle, by assuming the player has reached the maximum weapon strength at that point.
+
+You can find the Embers at some point in the game.
+
+~~
+
+Still not liking the lack of resolution here! I need to decide this NOW, pretty much, because I need to get to work in Florida.
+
+--- RANDOM NOTES
+
+- Make sure to set the default spawn location (-1) to the actual desired entrance point for each level, in case there are stable footing problems. It will usually be pretty close, but make sure it's exact. (In fact, may as well use -1 as the warp position when travelling to the level.)
+
+- 
+
+--- UPGRADES
+
+- You can level up at bonfires, just like before. In addition to the main bonfire in Firelink Shrine, there is a bonfire near the start of each level for you to respawn at. Each bonfire lets you warp back to Firelink Shrine. You cannot kindle bonfires, as humanity is not available.
+
+- You receive souls at the end of every level, after warping back to Firelink. (The "Kill Boss" event instruction is used when you rescue your team mate, and an "ALLY GAINED" banner appears with the boss kill sound effect.) The amount of souls depends on the level. You do not receive souls any other way. (The total amount is 120000.)
+    - Undead Burg awards 5000 souls.
+    - Catacombs awards 10000 souls.
+    - Sen's Fortress awards 15000 souls.
+    - Anor Londo awards 20000 souls.
+    - Duke's Archives awards 30000 souls.
+    - Depths awards 40000 souls.
+
+- You can find the Large Ember in...
+- You can find the Very Large Ember in...
+
+- You receive Titanite by killing certain enemies. (Not Crystal Lizards.) These enemies respawn, but will not drop the Titanite again.
+
+- You can find one Fire Keeper Soul hidden in each level.
+
+- Andre sells many basic items, such as Firebombs and moss, for quite cheap. There are no other merchants in the game.
+
+--- LEVELS
+
+Let's quickly go over the levels again.
+
+UNDEAD ASYLUM: Scripted story events.
+
+NEW LONDO RUINS: Sif is there, and can be rescued. Requires you to be cursed to defeat the ghosts threatening her.
+
+FIRELINK SHRINE: Hub world, connected directly to New Londo but separated from all other levels by loading screens. Your allies appear here as you rescue them.
+    - You find your Estus Flask (+0) next to the bonfire.
+    - Andre appears after you have beaten one level.
+    - Frampt appears after you have three allies, and unlocks more levels.
+    - Anastacia is below, but says nothing, like before.
+
+UNDEAD BURG: "First" level. Solaire is trapped in Sunlight Altar by the Hellkite. You must find a way to resist the Hellkite's fire damage and cross the bridge. 
+    - This is the first level, so it shouldn't be too hard a puzzle.
+    - I'm thinking that you can find pieces of pieces of Havel's Armor scattered around the level. Combined, they give you enough fire resistance to simply walk through the flames, though you'll be extremely overencumbered and may be continuously knocked down.
+    - You have to cross the entire bridge, which makes the fire resistance more badass. (Use my altered events from DoA.)
+    - It will still get "frustrated" and come down to attack, but you won't be able to get to the middle.
+    - Disable stable footing on the entire bridge to avoid save and quit cheese.
+    - Could hide a couple of pieces of the set in other places.
+    - Later on, you can return Havel's Armor to him in the Archive prison, and help him escape. The prison alarm goes off when you approach his cell, so you'll need him to help you escape. The prison door is locked while the alarm is active: your goal is to get to the alarm and turn it off. If Havel is killed by the Pisacas, the entire event will reset.
+    - If you pray to the Sunlight Altar after rescuing 5+ allies, you will receive the Ring of St Jude, which will summon an additional group of friends to the final battle when Kalameet shows up.
+
+CATACOMBS: "Second" level. Patches will appear near the first door after you open it, and cheerfully greet you, saying he woke up here and that the two of you may as well loot it, right? He'll then ask you to bring him anything you find.
+    - You can find loot by interacting with the various coffins around the Catacombs. All the loot is "Rounded White Bone". The description says that it is "a remnant of a skeletal abomination, fused with a torture device. Valuable to looters, and sadists."
+    - You can interact with Patches to give him the bones.
+    - When you've given him five Bones, one final piece of tempting loot lies down in the middle of the pit on a corpse. If you go to grab this loot, you'll find it's just Rubbish.
+    - An army of Bonewheels will appear, one for each bone you gave to Patches (maybe more than five), and attack from all sides at once. The exit will be fogged off, as well as Vamos's room if it's open, and the corridor to Pinwheel.
+    - If you die at this point, you will keep respawning in the pit, but any Bonewheels you've killed will not respawn.
+    - Once all of them are dead, you can escape and go back and talk to Patches. He acts shocked, just like if he rotated the bridge under you. He gives you the Etched Pale Bone, whose description says its owner can "command the bonewheel skeletons in battle". This item can be used once in the final battle and will spawn the five allied Bonewheels. The level ends at this point.
+    - (Useful items you can find: Rusted Iron Ring beneath the pile of pots, and Transient Curse by travelling to Nito's covenant with an Eye of Death.)
+
+SEN'S FORTRESS: "Third" level. Pitch black, "haunted house". Siegmeyer is trapped inside, in the cage where Logan is usually kept, but getting to him will be tricky.
+    - Even the exterior is pitch black. The only light comes from yourself.
+    - You start in the first room, with the front gate closed.
+    - The dart traps are modified, the same as in DoA.
+    - The boulders come out with high frequency, in groups of three, with manageable gaps every third boulder.
+    - The boulders change direction to try to kill you more aggressively.
+    - Undead Assassins will ambush you in certain locations, usually when your back is turned.
+    - You can't turn the boulder mechanism without the key, which you can only obtain by defeating dual Iron Golems on top of the Fortress. (They aren't modified at all.)
+    - You can also find the Cage Key in the tar pits, where it's dropped by a Chained Prisoner.
+    - You can find an Eye of Death by killing the gate-opening giant.
+    - (You can find the Rusted Iron Ring in the Catacombs.)
+    - The boulder mechanism will automatically change to send boulders down toward Siegmeyer if you head down there when the wall is broken. You'll need to kill the boulder-loading giant after destroying the wall to prevent this.
+    
+ANOR LONDO: "Fourth" level. Cathedral interior. Silver Knights roam the halls for you to fight (no change to them). There are two Queens here, Queen Bereska and Queen Sirena. They wait in the O&S room, played by two versions of the Darkmoon Knightess without helmets (different heads). 
+    - When you enter the boss room, they will both attack you. You must kill the one you think is evil.
+    - Early on, you encounter a Griggs-like NPC who, when killed, drops a note describing his suspicion that "your sister is planning to betray you".
+    - Other notes are hidden around the place, or dropped by non-respawning enemies, that eventually let you determine which sister is planning to kill the other.
+    - You must kill that boss first.
+    - If you choose correctly, the Giant Rat will be unleashed in the same boss room, and you must defeat it with the help of the "good" Queen, who is now an ally who can't be hurt. This is now what you find when you re-enter the fog.
+    - (The bonfire should be just inside the cathedral door. You see the Griggs NPC walking toward the fog when you spawn, and he notices you and attacks.)
+    - If the good Queen survives, she will bow to you after the rat is dead and join you at Firelink Shrine (leaning against a wall, apart from the others).
+    - If you kill the good Queen, Anor Londo goes dark, and you must now defeat both the evil Queen and her rat.
+
+DUKE'S ARCHIVES: "Fifth" level. A bunch of looters have arrived in the Archives. Logan gives you a ring, the Ring of Mimicry, that will give you Chameleon (in the Archives only) and let you turn opened chests in the Archives into Mimics, which the looters will open and be eaten by.
+    - Six looters. I've written their locations in Keep.
+    - When a looter gets within some distance of a Mimic, they will move to a region in front of it, rotate to face it, and the Mimic will attack and eat them. The Mimic has insane strength (and is on team White Phantom) and will kill them instantly. They won't respawn after this (but will if you kill them normally).
+    - After all six looters have been eaten, Logan will come down from his floating position and the level will end.
+    - You can also find Havel in the Prison, in a normal cell. The prison alarm will trigger when you open his cell and give him his armor back. (No Man-Serpents will spawn until then, the Pisaca will not be released, and the alarm lever can't be activated manually.)
+    - The prison door keys are dropped by one of the looters.
+    - Havel will try to reach the Giant Cell, in which his Dragon Tooth is kept in a chest. Until then, he will only have a Crystal Greatsword. Once you open the chest and receive the Dragon's Tooth, you can give it to him and end the level (this won't lose any looter Mimic progress).
+
+DEPTHS: "Sixth" level. "Besieged Dragon" plot, detailed elsewhere. This should be very doable.
+    - The only technical issue is confirming that special effect 1530 marks the full Dragon transformation.
+    
+OOLACILE:
+    - The final battle!
+    - Three Primordial Serpents can be seen just past the cliff (make sure their bottoms are not visible).
+    - The enemies are generally quite weak. Try to dial down any staggering attacks they have.
+    - Your allies, on the other hand, have a lot of HP. Play with it a bit. It's no fun if they're annihilated, or if they annihilate (though being outnumbered will always make it feel tough).
+    - In general, your best strategy for protecting your allies is to help the ones who are currently outnumbered, as this is the most likely cause of their death.
+    - The nest points for your team are carefully chosen. (They can also be changed at will with events.)
+    - Your team:
+        - Solaire
+        - Patches
+        - Siegmeyer
+        - Sif (optional but highly likely)
+            - Sif is invincible, and will stay alive as long as you do.
+        - Darkmoon Knightess/Queen
+        - Logan
+        - Havel
+        - Quelana
+        - Five Bonewheel ghosts (appear when you use Etched Pale Bone)
+    - Enemy forces:
+        - Wave 1: Armored Hollows, Hollow Soldiers, and basic Hollows
+            - These enemies are a good choice because they won't be ridiculously aggressive.
+            - This is a timed wave. They will keep spawning at the edge of the cliff.
+            - After a couple of minutes, Hawkeye Gough will appear (with a new name). He is on the "boss" team and can hurt his own Hollow army. When he is killed, the Hollows will stop spawning (disable spawner).
+            - Disable ragdoll corpse, or make corpse disappear completely if possible.
+        - Wave 2: Black Knights. Ten of them, lined up in a row.
+            - It's likely you'll lose some allies here.
+            - Note that I'm intentionally choosing enemies who don't leave more bodies behind now.
+        - Wave 3: Black Dragon Kalameet.
+            - He fades in during a fire-breathing attack in the middle.
+            - He has a ton of HP, but otherwise fairly normal.
+            - He drops the Soul of the Serpent (corrupted soul icon). When you pick it up, the level ends.
+            
+ENDGAME:   
+            - Back in Firelink, Frampt is gone.
+            - The allies who survived are still there. All levels are inaccessible, though.
+            - You can burn the Soul of the Serpent at Firelink (replaces Reverse Hollowing option) to regain your humanity... and the credits roll shortly afterwards.
+            - ...or you can consume it, which will cause all your allies to attack you (they have infinite aggro range). You become immortal, but when your HP reaches zero, the credits roll. If none of your allies are left, or you kill them all, a final "SERPENT REBORN" banner appears before the credits instead.

@@ -1,0 +1,106 @@
+
+--- NOTES ---
+
+CHARACTER CREATION
+	- Have to handle weapons somehow.
+	- Maybe just give most of them to Andre for sale, for varying amounts.
+	- Titanite is very precious, and can't be bought?
+
+- Player begins in Undead Asylum.
+- You're thrown the keys by Oscar, just like before.
+- You can free your allies from the three other cells:
+	- Solaire!
+	- Siegmeyer!
+	- Patches!
+	- The front door of the church won't open until you free them.
+- Manus appears, and after a short fight, the other Primordial Serpents
+appear in the arena. 
+	- Dark portals (Manus portal effect) appear where your allies are,
+	and they disappear.
+	- Manus then kills you.
+- You wake up in New Londo Ruins, outside the house.
+	- Almost all of the ghosts are gone...
+	- So are the treasure corpses, except maybe a couple with specific items.
+	- No Ingward.
+
+- Note that you never receive the Estus Flask.
+- Only "humanity" can heal you (new name). It doesn't give you actual soft humanity.
+- Instead, your soft humanity counts the number of allies rescued during the game.
+	
+QUEST 0: Sif in New Londo Ruins
+	- Sif is trapped by ghosts in the house in New Londo (in yellow ring).
+	- The only way to save her is by killing the ghosts.
+	- But you can't do that without becoming cursed, or a Transient Curse,
+	which is not available here.
+	- You can travel directly to Firelink Shrine.
+	
+	? Where do you get cursed? I think having a Basilisk hidden somewhere in one
+	level, and a Transient Curse item hidden in another, is the way to go. Both
+	in the first three levels.
+	
+FIRELINK SHRINE
+	- Ring of St Jude can be found on a corpse near the shrine.
+		- The description talks about a promise to protect those who need it.
+	- You finally receive your Estus Flask here. It also has a new description.
+	- There are paths to Burg (stairs), Catacombs (graveyard stairs), and Sen's (cliff lift).
+	- Frampt can be heard snoring after one ally has been rescued.
+	- Anor Londo, Archives, and Blighttown become available after Frampt awakens.
+	- There are interactable things in the graveyard, in the nest up top, etc.
+	- You warp to the level when you move towards it.
+		- Anor Londo is accessed from the Crow's nest. The crow picks you up (you need an item
+		from Frampt to get it to appear) and then you appear on the Anor Londo balcony (before
+		the fog into the interior). The Crow sits on the edge here and will take you back if
+		you speak to it (invincible).
+		- Archives is accessed the same way, via the crow, but you need to have a particular
+		ring equipped while you curl up in the nest.
+		- (How does your ally travel via Crow? Whatever.)
+	- When you rescue an ally, they will move to Firelink Shrine.
+		- They are on 'white phantom' team and cannot be attacked (and there are no enemies around).
+		- Make sure any skeletons in the graveyard (if there are any) don't go far enough to them.
+		- They gather quite close to the bonfire, unlike standard DS.
+		- Sif teleports there when you rescue him below.
+	- You can't talk to them, but interacting with them will select the ally who will join you
+	on missions.
+	- A status message tells you that you can select your ally by speaking with them, after you
+	rescue your second one.
+	- When an ally dies in a level, they will respawn along with you when you die.
+	- Andre moves to... somewhere easily accessible.
+	
+QUEST 1: Solaire in Undead Burg
+	- Solaire is held prisoner in the Parish cell.
+	- You start at the end of the aqueduct, before Lower Burg.
+	- (No suggestions for this one so far, so it's all on me.)
+	- I'm thinking a series of smaller "puzzles" to get there.
+	- Ends with a Gargoyle boss fight of some kind. Need to think of something new for it.
+	- When Solaire is freed, he stands up and bows, and you're warped back to Firelink.
+	- Gates: 
+		- No access to the abandoned church where Andre normally is.
+		- No access to the back of Lower Undead Burg?
+		- Walking down the stairs into the aqueduct at the start of Burg will warp you?
+		
+	- Problem: I want to use the Firelink parish elevator as the transition to Sen's
+	Fortress. That means it's weird to use the Parish for Solaire.
+	- Solution: Solaire is trapped at the Sunlight Altar, by the Dragon. The puzzle
+	is how to get past it. That's where the level ends (when you pull the lever inside).
+
+QUEST 2: Siegmeyer in Sen's Fortress.
+	- Siegmeyer is in the torture cage where Logan was.
+	- The gist of the puzzle is finding a way to break the wall to get there, and
+	finding the key to unlock his cage.
+	- The boulders come hard and fast, but with breaks.
+	- Again, no suggestions here (using the Mimic thing for Archives).
+	- Puzzle involves boulders, and working the boulder mechanism.
+	- Transient Curse hidden somewhere.
+	- Gates:
+		- No access to outside?
+		- Fortress gate is shut, with you inside.
+	- Hang on - feels silly getting here via the Parish elevator when Solaire's level
+	uses that area directly...
+	
+QUEST 3: Patches in the Catacombs.
+	- Patches is a bit different; he tricks you somehow.
+	- Not sure how him tricking you will work when dying sends you back to the start
+	of the level.
+	- Solution: two starts, one before he tricks you and one after.
+	- I'm thinking something about 
+

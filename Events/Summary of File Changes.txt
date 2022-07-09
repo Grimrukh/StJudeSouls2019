@@ -1,0 +1,53 @@
+
+PARAMS:
+    EquipGoodsParam:
+        298 == Remote Firebomb
+            No effects. Text only. Stocked by Undead Merchant.
+        299 == Remote Detonator
+            Icon 2148 (Purple Coward's Crystal)
+            Soul-crush animation?
+            Gives a dummy SpEffect for one second.
+    ItemLotParam:
+        Taurus Demon drop (good 2021).
+    NPCParam:
+        Remove all dropped souls from enemies.
+        Certain enemies drop Titanite Shards ONCE. Most drop nothing.
+    ObjActParam:
+        1310 -> Flag 11010180, Key 2021
+        1314 -> Flag 11010181, Key 2017
+        1317 -> Flag 11010182, Key 2001
+        1312 -> Flag 11010183, Key 2014
+    ShopLineupParam:
+        Undead Merchant:
+            Good, 298, 115000 souls
+            Weapon, 1505000, 115000 souls
+
+MSB:
+    m10_01_00_00:
+        Remove ObjAct 11010171 (door 1011306).
+        Remove ObjAct 11010172 (door 1011311).
+        Remove Sunlight Altar lever ObjAct.
+        Modify door ObjActs:
+            ObjAct 10 -> 11010180
+            ObjAct 14 -> 11010181
+            ObjAct 17 -> 11010182
+            ObjAct 12 -> 11010183
+        Change Solaire ID to 6000 and move to Sunlight Altar. Delete Talk ID.
+        Put invisible wall in aqueduct and region for warping to Firelink in front of it.
+        Disable stable footing for bridge by changing multiplayer ID to the Solaire Recruited flag.
+    m10_02_00_00:
+        Add all NPCs to map around bonfire. Use 10000-range event IDs.
+        Remove all other NPCs, except Anastacia (6060) and Frampt (6330).
+        Add regions for warping to Burg, Catacombs, Fortress, and Depths.
+
+
+TEXT:
+    Goods:
+        297 -> Remote Firebomb
+        298 == Firebomb Detonator
+        2001 -> Basement Key
+        2014 -> Lobrocop's Key
+        2017 -> Lan's Key
+        2021 -> ACOG's Key
+
+

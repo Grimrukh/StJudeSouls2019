@@ -1,0 +1,1348 @@
+from soulstruct.emevd import *
+from .firelink_shrine_constants import *
+
+
+@NeverRestart
+def Constructor():
+    """ 0: Event 0 """
+    RegisterBonfire(11020992, obj=1021960, reaction_distance=1.0, reaction_angle=180.0, initial_kindle_level=10)
+    SkipLinesIfFlagRangeAnyOff(2, FLAG.SolaireRecruited, FLAG.SifRecruited)
+    RegisterBonfire(11020992, obj=1021960, reaction_distance=1.0, reaction_angle=180.0, initial_kindle_level=30)
+    DropMandatoryTreasure(1020675)
+    if FLAG.AlliesKilled:
+        # Prevent bonfire interaction (replaced with burning prompt).
+        DisableCharacter(1020960)
+
+    DisableFlag(FLAG.BattleStarted)  # Reset Oolacile battle flag that prevents quit cheese.
+
+    # Parish elevator. Now always starts at the bottom.
+    EndOfAnimation(1021000, 12)  # Animation 11 sets up the other side of the elevator.
+    EnableFlag(11020302)  # Left side (looking at elevator) is down.
+
+    RunEvent(11020301)  # Not 11020300 (first-use).
+
+    RunEvent(11025050)  # Crow flies away.
+    FirstArrivalAtFirelink()
+    CurlUpInNest()
+    CrowPickupTimer()
+    AnastaciaDiesAndRevives()  # Never triggered, but leave it.
+    RunEvent(11020108)
+    RunEvent(11020120, slot=0, args=(11020120, 10010874, 1021465, 10010883, 2015))  # New Londo gate (leave).
+
+    FramptHoleOpens()
+    FallIntoFramptHole()
+    DisableFramptHoleKillboxes()
+
+    # Skeletons come to life. Just leave them.
+
+    RunEvent(11025200, slot=0, args=(1020203, 1020203, 4.0, 0.0), arg_types='iiff')
+    RunEvent(11025200, slot=1, args=(1020203, 1020204, 4.0, 0.8999999761581421), arg_types='iiff')
+    RunEvent(11025200, slot=2, args=(1020205, 1020205, 3.0, 0.0), arg_types='iiff')
+    RunEvent(11025200, slot=3, args=(1020205, 1020206, 3.0, 0.699999988079071), arg_types='iiff')
+    RunEvent(11025200, slot=6, args=(1020200, 1020200, 11.0, 0.0), arg_types='iiff')
+    RunEvent(11025200, slot=7, args=(1020200, 1020201, 11.0, 1.5), arg_types='iiff')
+    RunEvent(11025200, slot=8, args=(1020202, 1020202, 7.0, 0.0), arg_types='iiff')
+    RunEvent(11025200, slot=9, args=(1020202, 1020214, 7.0, 1.100000023841858), arg_types='iiff')
+    RunEvent(11025200, slot=10, args=(1020209, 1020209, 11.0, 0.0), arg_types='iiff')
+    RunEvent(11025200, slot=11, args=(1020209, 1020210, 11.0, 0.800000011920929), arg_types='iiff')
+    RunEvent(11025200, slot=12, args=(1020209, 1020211, 11.0, 1.5), arg_types='iiff')
+    RunEvent(11025200, slot=13, args=(1020209, 1020212, 11.0, 2.200000047683716), arg_types='iiff')
+    RunEvent(11025200, slot=14, args=(1020213, 1020213, 3.0, 0.0), arg_types='iiff')
+
+    WarpToUndeadBurg()
+    WarpToSensFortress()
+    WarpToCatacombs()
+    WarpToDepths()
+    ReturnFromUndeadBurg()
+
+    EstusFlaskObtained()
+    GetSerpentRing()
+    BurnSerpentSoul()
+    EndGameWithSif()
+
+
+@NeverRestart
+def Preconstructor():
+    """ 50: Event 50 """
+
+    EnableFlagRange(50004000, 50004069)
+    # Safety chest events deleted. Chest is always open and empty.
+    EndOfAnimation(1021690, 0)
+    DisableObjectActivation(1021690, objact_param_id=-1)
+
+    # New Londo gate already open.
+    EnableFlag(11020120)
+    EnableFlag(61020120)
+
+    ControlAllyAppearance()
+
+    # ANASTACIA
+    
+    RunEvent(11020110)
+    RunEvent(11020555, slot=0, args=(CHR.Anastacia, 1140, 1169, 1141))
+    RunEvent(11020556, slot=0, args=(CHR.Anastacia, 1140, 1169, 1146))
+    RunEvent(11020557, slot=0, args=(CHR.Anastacia, 1140, 1169, 1142))
+    RunEvent(11020558, slot=0, args=(CHR.Anastacia, 1140, 1169, 1145))
+
+    # UNDEAD FEMALE MERCHANT
+    FemaleUndeadMerchantRunsAway(8, CHR.FemaleUndeadMerchant, 1411)
+    FemaleUndeadMerchantDies(8, CHR.FemaleUndeadMerchant, 1410, 1413, 1412)
+
+    # FRAMPT
+
+    # 1640: Absent (immediately goes to 1641)
+    # 1641: Snoring below (default)
+    # 1642: Awake after you rescue two allies (formerly, after both bells rung)
+    # 1643: You have 6+ allies (formerly, after you have the Lordvessel)
+    # 1644: Frampt has warped you and will disappear (formerly Lordvessel placed)
+    # 1647: N/A
+    
+    EnableInvincibility(CHR.Frampt)
+    DisableGravity(CHR.Frampt)
+    SkipLinesIfFlagOn(2, 1644)
+    SkipLinesIfFlagOn(1, 1647)
+    SkipLines(1)
+    DisableCharacter(CHR.Frampt)
+    FramptSnoringBelow(0, CHR.Frampt, 1640, 1649, 1641)
+    FramptFirstAppears(0, CHR.Frampt, 1640, 1649, 1642)
+    FramptReadyToEatYou(0, CHR.Frampt, 1640, 1649, 1643)
+    FramptHasEatenYou(0, CHR.Frampt, 1640, 1649, 1644)
+    # RunEvent(11020424, slot=0, args=(CHR.Frampt, 1640, 1649, 1647))
+    # RunEvent(11020425, slot=0, args=(CHR.Frampt, 1640, 1649, 1647))
+    FramptEatsYou()
+    FramptFallsAsleep()
+
+
+@NeverRestart
+def Event11020300():
+    """ 11020300: First-time use of Parish elevator. (Now obsolete.) """
+    if THIS_FLAG:
+        RunEvent(11020301)
+        return
+    IfThisEventOff(1)
+    IfPlayerInsideRegion(1, 1022003)
+    IfConditionTrue(0, input_condition=1)
+    EnableFlag(11020300)
+    EnableFlag(11020302)
+    ForceAnimation(1021000, 0, loop=False, wait_for_completion=True, skip_transition=False)
+    IfPlayerOutsideRegion(2, 1022001)
+    IfPlayerOutsideRegion(2, 1022002)
+    IfConditionTrue(0, input_condition=2)
+    ForceAnimation(1021000, 22, loop=False, wait_for_completion=True, skip_transition=False)
+    Restart()
+
+
+@NeverRestart
+def Event11020301():
+    """ 11020301: Activate Parish elevator (once activated for the first time). """
+    IfSinglePlayer(1)
+    IfFlagOff(1, 11020302)
+    IfPlayerInsideRegion(1, 1022000)
+    IfSinglePlayer(2)
+    IfFlagOn(2, 11020302)
+    IfPlayerInsideRegion(2, 1022001)
+    IfSinglePlayer(3)
+    IfFlagOn(3, 11020302)
+    IfPlayerInsideRegion(3, 1022002)
+    IfSinglePlayer(4)
+    IfFlagOff(4, 11020302)
+    IfPlayerInsideRegion(4, 1022003)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(-1, input_condition=3)
+    IfConditionTrue(-1, input_condition=4)
+    IfConditionTrue(0, input_condition=-1)
+
+    WaitForNetworkApproval(max_seconds=3.0)
+    SkipLinesIfFinishedConditionTrue(8, 2)
+    SkipLinesIfFinishedConditionTrue(7, 3)
+    EnableFlag(11020302)
+    ForceAnimation(1021000, 2, loop=False, wait_for_completion=True, skip_transition=False)
+    IfPlayerOutsideRegion(5, 1022001)
+    IfPlayerOutsideRegion(5, 1022002)
+    IfConditionTrue(0, input_condition=5)
+    ForceAnimation(1021000, 22, loop=False, wait_for_completion=True, skip_transition=False)
+    Restart()
+    DisableFlag(11020302)
+    ForceAnimation(1021000, 1, loop=False, wait_for_completion=True, skip_transition=False)
+    IfPlayerOutsideRegion(6, 1022000)
+    IfPlayerOutsideRegion(6, 1022003)
+    IfConditionTrue(0, input_condition=6)
+    ForceAnimation(1021000, 21, loop=False, wait_for_completion=True, skip_transition=False)
+    Restart()
+
+
+@RestartOnRest
+def Event11025050():
+    """ 11025050: Event 11025050 """
+    EnableImmortality(1020100)
+    IfHealthLessThanOrEqual(0, 1020100, 0.30000001192092896)
+    ForceAnimation(1020100, 7000, loop=False, wait_for_completion=True, skip_transition=False)
+    DisableCharacter(1020100)
+
+
+@NeverRestart
+def FirstArrivalAtFirelink():
+    """ 11020001: Event 11020001 """
+    DisableNetworkSync()
+    if THIS_FLAG:
+        return
+
+    if not InsideMap(UNDEAD_ASYLUM):
+        await InsideMap(FIRELINK_SHRINE)
+        EnableFlag(11810000)
+
+    DisableBackread(CHR.Solaire)
+    DisableBackread(CHR.Logan)
+    DisableBackread(CHR.Anastacia)
+    DisableBackread(CHR.Patches)
+    DisableBackread(CHR.Siegmeyer)
+    DisableBackread(CHR.Quelana)
+    DisableBackread(CHR.Havel)
+    DisableBackread(CHR.Ornstein)
+    DisableBackread(CHR.Sif)
+    DisableBackread(CHR.Frampt)
+    DisableMapSound(1023800)
+
+    await FlagEnabled(11810000)
+
+    EnableMapSound(1023800)
+    EnableFlag(11020001)
+    Wait(3.0)
+    EnableBackread(CHR.Solaire)
+    EnableBackread(CHR.Logan)
+    EnableBackread(CHR.Anastacia)
+    EnableBackread(CHR.Patches)
+    EnableBackread(CHR.Siegmeyer)
+    EnableBackread(CHR.Quelana)
+    EnableBackread(CHR.Havel)
+    EnableBackread(CHR.Ornstein)
+    EnableBackread(CHR.Sif)
+    EnableBackread(CHR.Frampt)
+    EnableFlag(200)
+
+
+@RestartOnRest
+def Event11025200(ARG_0_3: int, ARG_4_7: int, ARG_8_11: float, ARG_12_15: float):
+    """ 11025200: Event 11025200 """
+    SkipLinesIfThisEventSlotOff(2)
+    ResetStandbyAnimationSettings(ARG_4_7)
+    End()
+    IfPlayerWithinDistance(0, ARG_0_3, ARG_8_11)
+    DisableNetworkSync()
+    Wait(ARG_12_15)
+    SetStandbyAnimationSettings(ARG_4_7, cancel_animation=9061)
+
+
+@NeverRestart
+def CurlUpInNest():
+    """ 11020020: Event 11020020 """
+    IfDialogPromptActivated(0, prompt_text=10010506, anchor_entity=1022120, anchor_type=Category.region, facing_angle=0.0, max_distance=0.0, human_or_hollow_only=True)
+    SetStandbyAnimationSettings(10000, standby_animation=7816)
+    ForceAnimation(10000, 7815, loop=False, wait_for_completion=True, skip_transition=False)
+    EnableFlag(11025060)
+    WaitFrames(3)
+    IfDialogPromptActivated(1, prompt_text=10010507, anchor_entity=1022120, anchor_type=Category.region, facing_angle=0.0, max_distance=0.0, human_or_hollow_only=True)
+    IfPlayerOutsideRegion(2, 1022120)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(0, input_condition=-1)
+    DisableFlag(11025060)
+    RestartEvent(11020021, slot=0)
+    ResetStandbyAnimationSettings(10000)
+    SkipLinesIfFinishedConditionTrue(1, 2)
+    ForceAnimation(10000, 7817, loop=False, wait_for_completion=True, skip_transition=False)
+    Restart()
+
+
+@NeverRestart
+def CrowPickupTimer():
+    """ 11020021: Event 11020021 """
+    DisableNetworkSync()
+    await FlagEnabled(11025060)
+    SkipLinesIfFlagOn(1, 11020000)
+    Wait(5.0)
+    PlayCutscene(cutscene_id=100230, skippable=True, fade_out=False, player_id=PLAYER)
+    WaitFrames(1)
+    EnableFlag(11020000)  # No need to wait next time.
+    DisableFlag(11025060)
+    ResetStandbyAnimationSettings(PLAYER)
+    if HasSpecialEffect(PLAYER, SPEFFECT.RingOfTheSerpent):
+        WarpToMap(DUKES_ARCHIVES)
+    else:
+        WarpToMap(ANOR_LONDO)
+    return RESTART
+
+
+@NeverRestart
+def AnastaciaDiesAndRevives():
+    """ 11020105: Event 11020105 """
+    DisableTreasure(1021300)
+    DisableObject(1021961)
+    return
+    # EndIfFlagOn(11020108)
+    # SkipLinesIfFlagOn(5, 11020101)
+    # IfFlagOn(0, 11020100)
+    # EnableFlag(102)
+    # EnableTreasure(1021300)
+    # IfFlagOn(0, 11020101)
+    # DisableFlag(102)
+    # IfFlagOn(0, 11020108)
+    # RegisterBonfire(11020992, obj=1021960, reaction_distance=1.0, reaction_angle=180.0, initial_kindle_level=30)
+
+
+@NeverRestart
+def Event11020106():
+    """ 11020106: Event 11020106 """
+    DisableNetworkSync()
+    IfFlagOn(1, 11020100)
+    IfFlagOff(1, 11020101)
+    IfDialogPromptActivated(1, prompt_text=10010182, anchor_entity=1021960, anchor_type=Category.object, facing_angle=180.0, max_distance=3.4000000953674316, human_or_hollow_only=True)
+    IfConditionTrue(0, input_condition=1)
+    DisplayDialog(10010184, anchor_entity=1021960, display_distance=3.4000000953674316, button_type=ButtonType.yes_no, number_buttons=NumberButtons.no_button)
+    Restart()
+
+
+@NeverRestart
+def Event11020108():
+    """ 11020108: Event 11020108 """
+    EndIfThisEventOn()
+    IfFlagOn(-1, 71020022)
+    IfFlagOn(-1, 71020023)
+    IfConditionTrue(0, input_condition=-1)
+    End()
+
+
+@NeverRestart
+def Event11020120(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int, ARG_16_19: int):
+    """ 11020120: Event 11020120 """
+    SkipLinesIfThisEventSlotOff(6)
+    DisableObjectActivation(ARG_8_11, objact_param_id=-1, relative_idx=0)
+    DisableObjectActivation(ARG_8_11, objact_param_id=-1, relative_idx=1)
+    DisableObjectActivation(ARG_8_11, objact_param_id=-1, relative_idx=2)
+    DisableObjectActivation(ARG_8_11, objact_param_id=-1, relative_idx=3)
+    EndOfAnimation(ARG_8_11, 0)
+    End()
+    IfHost(1)
+    IfObjectActivated(1, objact_id=ARG_0_3)
+    IfConditionTrue(0, input_condition=1)
+    EnableFlag(ARG_0_3)
+    SkipLinesIfClient(5)
+    IfPlayerOwnsGood(1, ARG_16_19, including_box=False)
+    SkipLinesIfConditionTrue(2, 1)
+    DisplayDialog(ARG_12_15, anchor_entity=ARG_8_11, display_distance=3.0, button_type=ButtonType.yes_no, number_buttons=NumberButtons.no_button)
+    SkipLines(1)
+    DisplayDialog(ARG_4_7, anchor_entity=ARG_8_11, display_distance=3.0, button_type=ButtonType.yes_no, number_buttons=NumberButtons.no_button)
+    DisableNetworkSync()
+    Wait(2.0)
+    DisableObjectActivation(ARG_8_11, objact_param_id=-1, relative_idx=0)
+    DisableObjectActivation(ARG_8_11, objact_param_id=-1, relative_idx=1)
+    DisableObjectActivation(ARG_8_11, objact_param_id=-1, relative_idx=2)
+    DisableObjectActivation(ARG_8_11, objact_param_id=-1, relative_idx=3)
+
+
+@NeverRestart
+def FramptHoleOpens():
+    """ 11020350: Frampt's hole opens when he appears. """
+    if FLAG.PatchesKilled:
+        # Stays shut.
+        DisableObject(1021481)
+        DisableHitbox(1023510)
+        return
+
+    if not THIS_FLAG:
+        DisableObject(1021481)
+        DisableHitbox(1023510)
+        IfTrueFlagCountGreaterThanOrEqual(0, 3, FLAG.SolaireRecruited, FLAG.SifRecruited)
+        EnableObject(1021481)
+        EnableHitbox(1023510)
+
+    DisableObject(1021480)
+    DisableHitbox(1023500)
+    DisableMapPart(1023501)
+    DisableHitbox(1023502)
+
+
+@NeverRestart
+def FallIntoFramptHole():
+    """ 11020351: Allows player to warp by falling into Frampt's hole. """
+    SkipLinesIfFlagOff(2, 0)
+    DisableHitbox(0)
+    DisableHitbox(0)
+
+    await PlayerInsideRegion(1022111)
+
+    if not FLAG.FramptHasEatenYou:
+        Kill(PLAYER, award_souls=False)
+        return
+
+    WarpToMap(OOLACILE)
+    WaitFrames(1)
+    return RESTART
+
+
+@NeverRestart
+def DisableFramptHoleKillboxes():
+    """ 11020352: Allows you to fall into hole. """
+    IfFlagOn(0, FLAG.FramptHasEatenYou)
+    DisableHitbox(1023600)
+    DisableHitbox(1023601)
+
+
+@NeverRestart
+def Event11020700(ARG_0_3: int, ARG_4_7: int):
+    """ 11020700: Event 11020700 """
+    SkipLinesIfThisEventSlotOff(4)
+    EndOfAnimation(ARG_0_3, 0)
+    DisableObjectActivation(ARG_0_3, objact_param_id=-1)
+    EnableTreasure(ARG_0_3)
+    End()
+    DisableTreasure(ARG_0_3)
+    IfObjectActivated(0, objact_id=ARG_4_7)
+    WaitFrames(10)
+    EnableTreasure(ARG_0_3)
+
+
+@RestartOnRest
+def Event11025150():
+    """ 11025150: Event 11025150 """
+    IfPlayerInsideRegion(0, 1022710)
+    AICommand(1020190, command_id=1, slot=3)
+    AICommand(1020160, command_id=1, slot=3)
+    AICommand(1020161, command_id=1, slot=3)
+    AICommand(1020163, command_id=1, slot=3)
+    AICommand(1020165, command_id=1, slot=3)
+    AICommand(1020166, command_id=1, slot=3)
+    ReplanAI(1020190)
+    ReplanAI(1020160)
+    ReplanAI(1020161)
+    ReplanAI(1020163)
+    ReplanAI(1020165)
+    ReplanAI(1020166)
+    IfPlayerOutsideRegion(0, 1022710)
+    AICommand(1020190, command_id=-1, slot=3)
+    AICommand(1020160, command_id=-1, slot=3)
+    AICommand(1020161, command_id=-1, slot=3)
+    AICommand(1020163, command_id=-1, slot=3)
+    AICommand(1020165, command_id=-1, slot=3)
+    AICommand(1020166, command_id=-1, slot=3)
+    ReplanAI(1020190)
+    ReplanAI(1020160)
+    ReplanAI(1020161)
+    ReplanAI(1020163)
+    ReplanAI(1020165)
+    ReplanAI(1020166)
+    Restart()
+
+
+@NeverRestart
+def Event11020510(ARG_0_3: int, ARG_4_7: int):
+    """ 11020510: Event 11020510 """
+    IfHealthLessThanOrEqual(1, ARG_0_3, 0.8999999761581421)
+    IfHealthGreaterThan(1, ARG_0_3, 0.0)
+    IfAttacked(1, ARG_0_3, attacking_character=10000)
+    IfFlagOn(2, ARG_4_7)
+    IfThisEventSlotOn(2)
+    IfFlagOn(3, ARG_4_7)
+    IfThisEventSlotOff(3)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(-1, input_condition=3)
+    IfConditionTrue(0, input_condition=-1)
+    SkipLinesIfFinishedConditionFalse(2, 3)
+    DisableCharacter(ARG_0_3)
+    IfFlagOn(0, 703)
+    EnableFlag(ARG_4_7)
+    SetTeamType(ARG_0_3, TeamType.hostile_ally)
+    SaveRequest()
+
+
+@NeverRestart
+def FemaleUndeadMerchantDies(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020530: Event 11020530 """
+    SkipLinesIfThisEventSlotOff(2)
+    DropMandatoryTreasure(ARG_0_3)
+    End()
+    IfHealthLessThanOrEqual(1, ARG_0_3, 0.0)
+    IfEntityInsideRegion(2, ARG_0_3, 1022300)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(0, input_condition=-1)
+    SkipLinesIfFinishedConditionTrue(2, 1)
+    Kill(ARG_0_3, award_souls=True)
+    DisableGravity(ARG_0_3)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+
+
+@NeverRestart
+def Event11020501():
+    """ 11020501: Event 11020501 """
+    IfFlagOn(1, 11010902)
+    IfFlagOff(1, 11020693)
+    IfFlagOff(1, 1176)
+    IfFlagRangeAllOff(1, 1193, 1196)
+    IfHealthLessThanOrEqual(2, 6070, 0.8999999761581421)
+    SkipLinesIfFlagOn(1, 1177)
+    IfAttacked(2, 6070, attacking_character=10000)
+    IfHealthLessThanOrEqual(3, 6080, 0.8999999761581421)
+    SkipLinesIfFlagOn(1, 1198)
+    IfAttacked(3, 6080, attacking_character=10000)
+    IfHealthLessThanOrEqual(4, 6090, 0.8999999761581421)
+    SkipLinesIfFlagOn(1, 1214)
+    IfAttacked(4, 6090, attacking_character=10000)
+    IfHealthLessThanOrEqual(5, 6100, 0.8999999761581421)
+    SkipLinesIfFlagOn(1, 1224)
+    IfAttacked(5, 6100, attacking_character=10000)
+    IfFlagOn(6, 1197)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(-1, input_condition=3)
+    IfConditionTrue(-1, input_condition=4)
+    IfConditionTrue(-1, input_condition=5)
+    IfConditionTrue(-1, input_condition=6)
+    IfConditionTrue(1, input_condition=-1)
+    IfThisEventOn(7)
+    IfConditionTrue(-2, input_condition=1)
+    IfConditionTrue(-2, input_condition=7)
+    IfConditionTrue(0, input_condition=-2)
+    SkipLinesIfFlagOn(2, 1177)
+    EnableFlag(1176)
+    EnableCharacter(6070)
+    SetTeamType(6070, TeamType.hostile_ally)
+    SkipLinesIfFlagOn(2, 1198)
+    EnableFlag(1197)
+    EnableCharacter(6080)
+    SetTeamType(6080, TeamType.hostile_ally)
+    SkipLinesIfFlagOn(2, 1214)
+    EnableFlag(1213)
+    EnableCharacter(6090)
+    SetTeamType(6090, TeamType.hostile_ally)
+    SkipLinesIfFlagOn(2, 1224)
+    EnableFlag(1223)
+    EnableCharacter(6100)
+    SetTeamType(6100, TeamType.hostile_ally)
+    SaveRequest()
+
+
+@NeverRestart
+def Event11020502(ARG_0_3: int, ARG_4_7: int):
+    """ 11020502: Event 11020502 """
+    IfFlagOff(7, 11010902)
+    IfFlagOff(7, 1195)
+    IfFlagOff(7, 1197)
+    IfFlagOn(7, 1202)
+    IfFlagOn(6, 11010902)
+    IfFlagOff(6, 1195)
+    IfFlagOff(6, 1197)
+    IfFlagOn(6, 1193)
+    IfConditionTrue(-2, input_condition=7)
+    IfConditionTrue(-2, input_condition=6)
+    IfConditionTrue(1, input_condition=-2)
+    IfHealthLessThanOrEqual(1, ARG_0_3, 0.8999999761581421)
+    IfHealthGreaterThan(1, ARG_0_3, 0.0)
+    IfAttacked(1, ARG_0_3, attacking_character=10000)
+    IfThisEventOff(1)
+    IfFlagOn(2, ARG_4_7)
+    IfThisEventOn(2)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(0, input_condition=-1)
+    EnableFlag(ARG_4_7)
+    SetTeamType(ARG_0_3, TeamType.hostile_ally)
+    SaveRequest()
+
+
+@NeverRestart
+def Event11020503(ARG_0_3: int, ARG_4_7: int):
+    """ 11020503: Event 11020503 """
+    IfFlagOff(1, 1197)
+    IfFlagOn(1, 1194)
+    IfHealthLessThanOrEqual(1, ARG_0_3, 0.8999999761581421)
+    IfHealthGreaterThan(1, ARG_0_3, 0.0)
+    IfAttacked(1, ARG_0_3, attacking_character=10000)
+    IfFlagOn(2, ARG_4_7)
+    IfThisEventOn(2)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(0, input_condition=-1)
+    EnableFlag(ARG_4_7)
+    SetTeamType(ARG_0_3, TeamType.hostile_ally)
+    SaveRequest()
+
+
+@RestartOnRest
+def FemaleUndeadMerchantRunsAway(ARG_0_3: int, ARG_4_7: int):
+    """ 11020504: No longer permanent (no flag change). """
+    IfHealthLessThanOrEqual(1, ARG_0_3, 0.8999999761581421)
+    IfHealthGreaterThan(1, ARG_0_3, 0.0)
+    IfAttacked(1, ARG_0_3, attacking_character=10000)
+    IfConditionTrue(0, input_condition=1)
+
+    SetTeamType(ARG_0_3, TeamType.enemy)
+    SetNest(ARG_0_3, 1022700)
+    AICommand(ARG_0_3, command_id=1, slot=0)
+    ReplanAI(ARG_0_3)
+    IfEntityInsideRegion(0, ARG_0_3, 1022700)
+    AICommand(ARG_0_3, command_id=-1, slot=0)
+    ReplanAI(ARG_0_3)
+
+
+@NeverRestart
+def Event11020550(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020550: Event 11020550 """
+    IfFlagOff(1, 1096)
+    IfFlagOff(1, 1099)
+    IfFlagOn(1, 1091)
+    IfFlagOn(1, 11500594)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020551(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020551: Event 11020551 """
+    IfFlagOff(1, 1096)
+    IfFlagOff(1, 1099)
+    IfFlagOn(1, 1092)
+    IfFlagOn(1, 11020603)
+    IfOutsideMap(1, FIRELINK_SHRINE)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableFlag(11020694)
+    DisableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020552(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020552: Event 11020552 """
+    IfFlagOff(1, 1114)
+    IfFlagOff(1, 1117)
+    IfFlagOn(1, 1111)
+    IfInsideMap(1, FIRELINK_SHRINE)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020553(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020553: Event 11020553 """
+    IfFlagOff(1, 1114)
+    IfFlagOff(1, 1117)
+    IfFlagOn(1, 1112)
+    IfFlagOn(1, 11020694)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020554(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020554: Event 11020554 """
+    IfFlagOff(1, 1114)
+    IfFlagOff(1, 1117)
+    IfFlagOn(1, 1113)
+    IfFlagOn(1, 723)
+    IfInsideMap(1, SENS_FORTRESS)
+    EndIfConditionFalse(1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    DisableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020555(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020555: Event 11020555 """
+    IfFlagOn(1, 1140)
+    IfFlagOff(1, 1574)
+    IfFlagOff(1, 1575)
+    IfFlagOn(2, 812)
+    IfFlagOn(2, 813)
+    IfConditionTrue(-1, input_condition=2)
+    IfFlagOn(-1, 11500200)
+    IfConditionTrue(1, input_condition=-1)
+    IfAlive(1, ARG_0_3)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+
+
+@NeverRestart
+def Event11020556(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020556: Event 11020556 """
+    IfFlagOn(1, 1141)
+    IfFlagOn(1, 810)
+    IfAlive(1, ARG_0_3)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+
+
+@NeverRestart
+def Event11020557(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020557: Event 11020557 """
+    IfFlagOn(1, 1146)
+    IfFlagOn(1, 11020609)
+    IfAlive(1, ARG_0_3)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+
+
+@NeverRestart
+def Event11020558(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020558: Event 11020558 """
+    IfFlagOn(1, 1142)
+    IfFlagOn(1, 11800200)
+    IfAlive(1, ARG_0_3)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+
+
+@NeverRestart
+def Event11020559():
+    """ 11020559: Event 11020559 """
+    IfFlagOn(1, 1170)
+    IfFlagOn(1, 11010902)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(1170, 1189)
+    EnableFlag(1171)
+    EnableCharacter(6070)
+    DisableFlagRange(1210, 1219)
+    EnableFlag(1211)
+    EnableCharacter(6090)
+    DisableFlagRange(1220, 1229)
+    EnableFlag(1221)
+    EnableCharacter(6100)
+
+
+@NeverRestart
+def Event11020560():
+    """ 11020560: Event 11020560 """
+    IfFlagRangeAllOff(7, 1176, 1181)
+    IfFlagOn(7, 1171)
+    IfFlagRangeAllOff(7, 1195, 1198)
+    IfFlagOn(7, 1202)
+    IfFlagRangeAllOff(7, 1213, 1215)
+    IfFlagOn(7, 1211)
+    IfFlagRangeAllOff(7, 1223, 1225)
+    IfFlagOn(7, 1221)
+    IfConditionTrue(1, input_condition=7)
+    IfFlagOn(1, 11020600)
+    IfThisEventOff(1)
+    IfConditionTrue(2, input_condition=7)
+    IfFlagOn(2, 11300005)
+    IfConditionTrue(3, input_condition=7)
+    IfThisEventOn(3)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(-1, input_condition=3)
+    IfConditionTrue(0, input_condition=-1)
+    EndIfFinishedConditionTrue(1)
+    ClearEventValue(600, bit_count=4)
+    EnableFlag(11020693)
+    DisableFlagRange(1170, 1189)
+    EnableFlag(1173)
+    DisableCharacter(6070)
+    DisableFlagRange(1190, 1209)
+    EnableFlag(1192)
+    DisableCharacter(6080)
+    DisableFlagRange(1210, 1219)
+    EnableFlag(1216)
+    DisableCharacter(6090)
+    DisableFlagRange(1220, 1229)
+    EnableFlag(1226)
+    DisableCharacter(6100)
+
+
+@NeverRestart
+def Event11020564(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020564: Event 11020564 """
+    IfFlagOff(1, 1195)
+    IfFlagOff(1, 1197)
+    IfFlagOn(1, 1192)
+    EndIfConditionFalse(1)
+    SkipLinesIfFlagOn(2, 11020692)
+    EnableFlag(11020692)
+    End()
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020565(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020565: Event 11020565 """
+    IfFlagOff(1, 1195)
+    IfFlagOff(1, 1197)
+    IfFlagOn(1, 1193)
+    IfFlagOn(1, 11020608)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020567(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020567: Event 11020567 """
+    IfFlagOn(-2, 1194)
+    IfFlagOn(-2, 1195)
+    IfConditionTrue(1, input_condition=-2)
+    IfHealthLessThanOrEqual(1, ARG_0_3, 0.0)
+    IfFlagOn(2, 1196)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(0, input_condition=-1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EndIfFinishedConditionTrue(1)
+    DropMandatoryTreasure(ARG_0_3)
+
+
+@NeverRestart
+def Event11020569(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020569: Event 11020569 """
+    IfFlagOff(1, 1194)
+    IfFlagOff(1, 1195)
+    IfFlagOff(1, 1196)
+    IfHealthLessThanOrEqual(1, ARG_0_3, 0.0)
+    IfFlagOn(2, 1198)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(0, input_condition=-1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EndIfFinishedConditionTrue(1)
+    DropMandatoryTreasure(ARG_0_3)
+
+
+@NeverRestart
+def Event11020574(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020574: Event 11020574 """
+    IfFlagOff(1, 1253)
+    IfFlagOn(1, 1251)
+    IfInsideMap(1, FIRELINK_SHRINE)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020575(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020575: Event 11020575 """
+    IfFlagOff(1, 1253)
+    IfFlagOn(1, 1252)
+    IfFlagOn(1, 11020102)
+    IfFlagOn(1, 11020103)
+    IfAlive(1, ARG_0_3)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+
+
+@NeverRestart
+def Event11020576(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020576: Event 11020576 """
+    IfFlagOff(1, 1314)
+    IfFlagOn(1, 1312)
+    IfFlagOn(1, 11600593)
+    IfInsideMap(1, FIRELINK_SHRINE)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020577(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020577: Event 11020577 """
+    IfFlagOff(1, 1461)
+    IfFlagOff(1, 1464)
+    IfFlagOn(1, 1460)
+    IfFlagOn(1, 11020597)
+    IfOutsideMap(1, FIRELINK_SHRINE)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    DisableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020579(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020579: Event 11020579 """
+    IfFlagOff(1, 1512)
+    IfFlagOn(1, 1494)
+    IfFlagOn(1, 11510590)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020583(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020583: Event 11020583 """
+    IfFlagOff(1, 1547)
+    IfFlagOn(1, 1542)
+    IfFlagOn(1, 11700593)
+    IfFlagOff(1, 1512)
+    IfFlagOff(1, 1513)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020584(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020584: Event 11020584 """
+    IfFlagOff(1, 1547)
+    IfFlagOn(1, 1543)
+    IfFlagOn(1, 11020605)
+    IfThisEventOff(1)
+    IfFlagOff(2, 1547)
+    IfFlagOn(2, 1543)
+    IfThisEventOn(2)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(0, input_condition=-1)
+    EndIfFinishedConditionTrue(1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    DisableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020585(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020585: Event 11020585 """
+    IfFlagOff(1, 1547)
+    IfFlagOn(1, 1544)
+    IfFlagOn(1, 11410593)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020586(ARG_0_3: int):
+    """ 11020586: Event 11020586 """
+    IfFlagOff(1, 1547)
+    IfFlagOn(1, 1545)
+    IfFlagOn(1, 11020606)
+    IfThisEventOff(1)
+    IfFlagOff(2, 1547)
+    IfFlagOn(2, 1545)
+    IfThisEventOn(2)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(0, input_condition=-1)
+    EndIfFinishedConditionTrue(1)
+    DisableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020587(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020587: Event 11020587 """
+    IfFlagOff(1, 1574)
+    IfFlagOff(1, 1578)
+    IfFlagOn(1, 1571)
+    IfInsideMap(1, FIRELINK_SHRINE)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableCharacter(ARG_0_3)
+    EnableFlag(11020690)
+    EnableFlag(11020691)
+
+
+@NeverRestart
+def Event11020588(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int, ARG_16_19: int, ARG_20_23: int):
+    """ 11020588: Event 11020588 """
+    IfFlagOff(1, 1574)
+    IfFlagOff(1, 1578)
+    IfFlagOn(1, 1572)
+    IfFlagOff(1, 1574)
+    IfFlagOff(1, 1578)
+    IfFlagOn(2, 1577)
+    IfFlagOff(3, 1574)
+    IfFlagOff(3, 1578)
+    IfFlagOn(3, 1573)
+    IfConditionTrue(-1, input_condition=1)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(-1, input_condition=3)
+    IfConditionTrue(0, input_condition=-1)
+    SkipLinesIfFinishedConditionTrue(6, 3)
+    EnableRandomFlagInRange(11025120, 11025122)
+    IfFlagOn(0, 11025120)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    DisableCharacter(ARG_0_3)
+    End()
+    SkipLinesIfFlagOff(4, 11020691)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_16_19)
+    EnableCharacter(ARG_0_3)
+    End()
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_20_23)
+    EnableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020589(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020589: Event 11020589 """
+    IfFlagOff(1, 1574)
+    IfFlagOff(1, 1578)
+    IfFlagOn(-1, 1570)
+    IfFlagOn(-1, 1577)
+    IfConditionTrue(1, input_condition=-1)
+    IfFlagOn(1, 3)
+    IfInsideMap(1, FIRELINK_SHRINE)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableCharacter(ARG_0_3)
+    EnableFlag(11020690)
+
+
+@NeverRestart
+def Event11020410(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020410: Event 11020410 """
+    IfFlagOff(1, 1574)
+    IfFlagOff(1, 1578)
+    IfFlagOn(-1, 1572)
+    IfFlagOn(-1, 1573)
+    IfFlagOn(-1, 1577)
+    IfConditionTrue(1, input_condition=-1)
+    IfFlagOn(2, 812)
+    IfFlagOn(2, 813)
+    IfConditionTrue(-2, input_condition=2)
+    IfFlagOn(-2, 11500200)
+    IfConditionTrue(1, input_condition=-2)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    DisableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020411(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020411: Event 11020411 """
+    IfFlagOff(1, 1622)
+    IfFlagOff(1, 1625)
+    IfFlagOff(1, 1627)
+    IfFlagOff(1, 1628)
+    IfFlagOn(1, 1624)
+    IfFlagOn(1, 7)
+    IfInsideMap(1, FIRELINK_SHRINE)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020412(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020412: Event 11020412 """
+    IfFlagOff(1, 1434)
+    IfFlagOff(1, 1435)
+    IfFlagOn(1, 1430)
+    IfFlagOn(1, 11010700)
+    IfFlagOn(1, 11400200)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    EnableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020413(ARG_0_3: int, ARG_4_7: int):
+    """ 11020413: Event 11020413 """
+    SkipLinesIfThisEventOff(2)
+    DropMandatoryTreasure(ARG_0_3)
+    End()
+    IfHealthLessThanOrEqual(0, ARG_0_3, 0.0)
+    DisableFlag(1434)
+    EnableFlag(ARG_4_7)
+
+
+@NeverRestart
+def FramptSnoringBelow(frampt: int, first_flag: int, last_flag: int, new_flag: int):
+    """ 11020420: Event 11020420 """
+    await (FlagEnabled(1640) or FlagEnabled(1641))
+
+    DisableFlagRange(first_flag, last_flag)
+    EnableFlag(new_flag)
+    EnableCharacter(frampt)
+    SetStandbyAnimationSettings(frampt, standby_animation=9000)
+
+
+@NeverRestart
+def FramptFirstAppears(frampt: int, first_flag: int, last_flag: int, new_flag: int):
+    """ 11020421: Frampt first appears when you have rescued 2+ allies. """
+    IfFlagOn(1, 1641)
+    IfTrueFlagCountGreaterThanOrEqual(1, 3, FLAG.SolaireRecruited, FLAG.SifRecruited)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(first_flag, last_flag)
+    EnableFlag(new_flag)
+    EnableCharacter(frampt)
+    SetStandbyAnimationSettings(frampt, standby_animation=7003)
+
+
+@NeverRestart
+def FramptReadyToEatYou(frampt: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020422: Frampt will take you to the final battle after you have 6+ allies. """
+    IfFlagOn(1, 1642)
+    IfFlagRangeAllOn(1, FLAG.SolaireRecruited, FLAG.SifRecruited)
+    IfAlive(1, frampt)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+
+
+@NeverRestart
+def FramptHasEatenYou(frampt: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020423: Frampt has eaten you. He will disappear on next load. """
+    IfFlagOn(1, 1643)
+    IfFlagOn(1, FLAG.FramptHasEatenYou)
+    IfAlive(1, frampt)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    DisableCharacter(frampt)
+
+
+@NeverRestart
+def Event11020424(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020424: Event 11020424 """
+    IfFlagOn(1, 1649)
+    IfFlagOn(1, 11020598)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    ForceAnimation(ARG_0_3, 7005, loop=False, wait_for_completion=True, skip_transition=False)
+    DisableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def Event11020425(ARG_0_3: int, ARG_4_7: int, ARG_8_11: int, ARG_12_15: int):
+    """ 11020425: Event 11020425 """
+    IfInsideMap(1, FIRELINK_SHRINE)
+    IfFlagOn(-1, 11020598)
+    IfHealthLessThanOrEqual(2, ARG_0_3, 0.8999999761581421)
+    IfHealthGreaterThan(2, ARG_0_3, 0.0)
+    IfAttacked(2, ARG_0_3, attacking_character=10000)
+    IfEntityBeyondDistance(2, ARG_0_3, 10000, 15.0)
+    IfConditionTrue(-1, input_condition=2)
+    IfConditionTrue(1, input_condition=-1)
+    IfConditionTrue(0, input_condition=1)
+    DisableFlagRange(ARG_4_7, ARG_8_11)
+    EnableFlag(ARG_12_15)
+    ForceAnimation(ARG_0_3, 7005, loop=False, wait_for_completion=True, skip_transition=False)
+    DisableCharacter(ARG_0_3)
+
+
+@NeverRestart
+def FramptEatsYou():
+    """ 11022009: Frampt eats you to warp you to Oolacile. """
+    await (FlagEnabled(1643) and FLAG.FramptOfferedWarp and
+           DialogPromptActivated(TEXT.LetFramptEatYou, anchor_entity=CHR.Frampt,
+                                 facing_angle=180.0, max_distance=4.0, model_point=-1))
+    EnableCharacter(6331)  # I assume this is Kiln Frampt.
+    PlayCutscene(cutscene_id=100240, skippable=True, fade_out=False, player_id=PLAYER)
+    WaitFrames(1)
+    WarpToMap(OOLACILE)
+    return RESTART
+
+
+@NeverRestart
+def FramptFallsAsleep():
+    """ 11026210: Frampt randomly falls asleep. """
+    DisableFlag(1650)
+    IfInsideMap(1, FIRELINK_SHRINE)
+    IfEntityBeyondDistance(1, CHR.Frampt, PLAYER, 30.0)
+    IfFlagOff(1, 830)
+    IfConditionTrue(0, input_condition=1)
+    IfFlagOn(-1, 1643)
+    IfFlagOn(-1, 1644)
+    IfFlagOn(-1, 1645)
+    EndIfConditionFalse(-1)
+    DisableFlagRange(11026211, 11026213)
+    EnableRandomFlagInRange(11026211, 11026213)
+    EndIfFlagOn(11026211)
+
+    EnableFlag(1650)
+    SetStandbyAnimationSettings(CHR.Frampt, standby_animation=9001)
+    IfAttacked(0, CHR.Frampt, attacking_character=PLAYER)
+    AddSpecialEffect(CHR.Frampt, 5450)
+    SetStandbyAnimationSettings(CHR.Frampt, standby_animation=7003)
+    ForceAnimation(CHR.Frampt, 9061, loop=False, wait_for_completion=True, skip_transition=False)
+    DisableFlag(1650)
+
+
+@NeverRestart
+def Event11020110():
+    """ 11020110: Event 11020110 """
+    EnableImmortality(CHR.Anastacia)
+    EndIfFlagOn(11020101)
+    SkipLinesIfFlagOn(1, 11020100)
+    IfFlagOn(0, 1141)
+    EzstateAIRequest(CHR.Anastacia, command_id=1702, slot=0)
+    EnableFlag(11020100)
+    SkipLinesIfFlagOn(4, 11020111)
+    IfFlagOn(0, 11020609)
+    EzstateAIRequest(CHR.Anastacia, command_id=1701, slot=0)
+    EnableFlag(11020111)
+    IfHasTAEEvent(0, CHR.Anastacia, tae_event_id=1701)
+    EnableFlag(11020101)
+
+
+def WarpToUndeadBurg():
+    """ 11022000: Warp to Undead Burg from the stairs toward the aqueduct. """
+    if FLAG.PatchesKilled:
+        return
+    Await(DialogPromptActivated(TEXT.TravelToCity, anchor_entity=REGION.GoToUndeadBurg))
+    WarpToMap(UNDEAD_BURG)
+    Wait(3.0)
+    return RESTART
+
+
+def WarpToSensFortress():
+    """ 11022001: Warp to Sen's Fortress from the elevator (automatic). """
+    if FLAG.PatchesKilled:
+        WaitFrames(10)
+        StopEvent(11020301)  # No more elevator.
+        return
+    await REGION.GoToSensFortress
+    WarpToMap(SENS_FORTRESS)
+    Wait(3.0)
+    return RESTART
+
+
+def WarpToCatacombs():
+    """ 11022002: Warp to Catacombs from the graveyard stairs. """
+    if FLAG.PatchesKilled:
+        return
+    Await(DialogPromptActivated(TEXT.TravelToCatacombs, anchor_entity=REGION.GoToCatacombs))
+    WarpToMap(CATACOMBS)
+    Wait(3.0)
+    return RESTART
+
+
+def WarpToDepths():
+    """ 11022003: Warp to Depths from the well. """
+    if FLAG.PatchesKilled:
+        return
+    Await(HasSpecialEffect(PLAYER, SPEFFECT.RingOfTheSerpent)
+          and DialogPromptActivated(TEXT.TravelToDepths, anchor_entity=CHR.GoToDepths, facing_angle=180.0,
+                                    max_distance=2.0, model_point=-1))
+    WarpToMap(DEPTHS)
+    Wait(3.0)
+    return RESTART
+
+
+def ReturnFromUndeadBurg():
+    """ 11022004: Warp back to Firelink Shrine from Undead Burg aqueduct. """
+    Await(DialogPromptActivated(TEXT.ReturnToFirelink, anchor_entity=REGION.ReturnFromUndeadBurg))
+    WarpToMap(FIRELINK_SHRINE)
+    Wait(3.0)
+    return RESTART
+
+
+@RestartOnRest
+def ControlAllyAppearance():
+    """ 11022005: Control allies. """
+    if FLAG.AlliesKilled or not FLAG.SolaireRecruited:
+        DisableCharacter(CHR.Solaire)
+    else:
+        SetTeamType(CHR.Solaire, TeamType.white_phantom)
+
+    if FLAG.AlliesKilled or not FLAG.SiegmeyerRecruited:
+        DisableCharacter(CHR.Siegmeyer)
+    else:
+        SetTeamType(CHR.Siegmeyer, TeamType.white_phantom)
+
+    if FLAG.PatchesKilled or not FLAG.PatchesRecruited:
+        DisableCharacter(CHR.Patches)
+    else:
+        SetTeamType(CHR.Patches, TeamType.white_phantom)
+
+    if FLAG.AlliesKilled or not FLAG.OrnsteinRecruited:
+        DisableCharacter(CHR.Ornstein)
+    else:
+        SetTeamType(CHR.Ornstein, TeamType.white_phantom)
+
+    if FLAG.AlliesKilled or not FLAG.LoganRecruited:
+        DisableCharacter(CHR.Logan)
+    else:
+        SetTeamType(CHR.Logan, TeamType.white_phantom)
+
+    if FLAG.AlliesKilled or not FLAG.HavelRecruited:
+        DisableCharacter(CHR.Havel)
+    else:
+        SetTeamType(CHR.Havel, TeamType.white_phantom)
+
+    if FLAG.AlliesKilled or not FLAG.QuelanaRecruited:
+        DisableCharacter(CHR.Quelana)
+    else:
+        SetTeamType(CHR.Quelana, TeamType.white_phantom)
+
+    if FLAG.AlliesKilled or not FLAG.SifRecruited:
+        DisableCharacter(CHR.Sif)
+    else:
+        SetTeamType(CHR.Sif, TeamType.white_phantom)
+        ForceAnimation(CHR.Sif, 7009, loop=True)
+        AddSpecialEffect(CHR.Sif, SPEFFECT.HalfSpeed)
+
+
+def BurnSerpentSoul():
+    """ 11022006: Burn soul. """
+    await (HasGood(GOOD.SerpentSoul) and DialogPromptActivated(
+        TEXT.BurnSerpentSoul, anchor_entity=1021960, anchor_type=Category.object, facing_angle=180.0,
+        max_distance=1.0, model_point=-1))
+
+    ForceAnimation(PLAYER, 7114, wait_for_completion=True)
+    RemoveGoodFromPlayer(GOOD.SerpentSoul)
+    DisableFlag(FLAG.AlliesKilled)
+    DisplayBanner(TextBannerType.ring_revival)  # DARKNESS DESTROYED
+    Wait(4.0)
+    DisplayStatus(TEXT.RestToReviveFriends)
+    EnableCharacter(1020960)
+
+
+@RestartOnRest
+def EndGameWithSif():
+    """ 11022007: Talk to Sif to end game. """
+    if not FLAG.SerpentSoulDestroyed:
+        return
+    await DialogPromptActivated(TEXT.RestAndEnd, CHR.Sif, facing_angle=180.0, max_distance=2.0, model_point=-1)
+    RotateToFaceEntity(PLAYER, 1021960)
+    # ForceAnimation(PLAYER, 7700, wait_for_completion=True)
+    ForceAnimation(PLAYER, 7701, loop=True)
+    Wait(5.0)
+    EnableFlag(20)
+
+
+def GetSerpentRing():
+    """ 11022008: Get Serpent Ring after receiving Frampt's advice. """
+    if THIS_FLAG:
+        return
+    await FLAG.FramptHelpReceived
+    AwardItemLot(ITEMLOT.FramptGift)
+
+
+def EstusFlaskObtained():
+    """ 11022010: Estus Flask picked up, which lets Anastacia upgrade it. """
+    if THIS_FLAG:
+        return
+    await FlagEnabled(51020000)
+    EnableFlag(716)

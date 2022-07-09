@@ -1,0 +1,74 @@
+
+ANOR LONDO CLUES
+
+- Griggs' letter. Gives you the basic quest.
+
+- Letter carried by a Painting Guardian in the dark basement:
+Note found on a cloaked servant:
+
+"Ester,
+We must act soon; I believe he is
+beginning to suspect something. Bring
+the beast to my bedroom and hide the
+cage under my bed. I will take care
+of the rest.
+                Your True King"
+                
+- Inspect under Scornstein's bed:
+"An empty cage lies beneath the bed.\nTraces of fur remain inside."
+
+- Under Mornstein's bed: 
+"There is nothing under the bed."
+
+- Inspect the blue dragon head:
+"The symbol \"M.\" is carved into the scales."
+
+- Inspect the lower left fireplace:
+(Get Charred Scrap) 2009
+Burned scrap of paper among
+the ashes:
+
+"-but he's been envious of me ever
+since I took down that blue beast
+after he missed his shot. He has
+to die. Leonia will be better off
+without such weakness..."
+
+- Other fireplaces:
+"Nothing but ashes."
+
+- Inspect Blacksmith's stuff (324):
+(Get Message to the Paintsmith) 323
+Note found on an anvil:
+
+"Beautiful work, but the figure is
+a little... fuller than I was
+expecting. Can you tone it down a
+notch? I want our guests looking 
+at the other paintings as well!
+                --S."
+
+- Etched Message (324):
+"Use this to carefully burn the 
+edges of the paper. Make it look 
+natural.
+
+Then destroy this stone before
+the demon I stole it from comes
+looking for it..."
+
+- Found on corpse on roof (325):
+Royal commendation:
+"My loyal attendant,
+Thank you for rescuing that artwork 
+for me. I certainly do not share my 
+brother's qualms with it, and he 
+is welcome to whatever diminished
+version the smith is working on for
+him.
+
+Please hang it in my bedroom at once."
+
+
+
+578	143.4	253
